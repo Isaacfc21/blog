@@ -29,12 +29,36 @@
     //Conteúdo
 ?>
 <?php
-    //Aula 026  
+    //Aula 026 
+
+    // include_once "sistema/configuracao.php";
+    // include_once "helpers.php";
+
+    
+    // $data = date('d/m/Y H:i:s');
+    // echo $data;
+
+    //Conteúdo
+?>
+<?php
+    //Aula 027
+
+    // include_once "sistema/configuracao.php";
+    // include_once "helpers.php";
+
+    
+    // echo (contarTempo('2020-03-19 20:31:36'));
+
+    //Conteúdo
+?>
+<?php
+    //Aula 028
 
     include_once "sistema/configuracao.php";
     include_once "helpers.php";
 
     
-    $data = date('d/m/Y H:i:s');
-    echo $data;
+    echo (contarTempo('2020-03-19 20:31:36'));
+
+    //Conteúdo
 ?>
