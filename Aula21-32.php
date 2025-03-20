@@ -54,11 +54,49 @@
 <?php
     //Aula 028
 
-    include_once "sistema/configuracao.php";
+    # require_once "sistema/configuracao.php";
+    # include_once "helpers.php";
+
+    // if(validarEmail('teste@gmail.com')){
+    //     echo 'Endereço de e-mail válido';
+    // }else{
+    //     echo 'E-mail inválido';
+    // }
+    # var_dump(validarURL('http://teste.com'))
+    # var_dump(validarEmail('teste@gmail.com'));
+
+    //Conteúdo
+?>
+<?php
+    //Aula 029
+
+    /*
+    require_once "sistema/configuracao.php";
     include_once "helpers.php";
 
-    
-    echo (contarTempo('2020-03-19 20:31:36'));
+    $url = 'https://unset.com';
+    var_dump(validarURL($url));
+    echo '<hr>';
+    var_dump(validarURLComFiltro($url));
+    */
 
+    //Conteúdo
+?>
+<?php
+    //Aula 030
+
+    require_once "sistema/configuracao.php";
+    include_once "helpers.php";
+
+    echo SITE_NOME;
+    echo '<hr>';
+    echo SITE_DESCRICAO; 
+
+    // if(true){
+    //     // define('SITE_NOME','Isaac'); // Posso usar em estruturas condicionais
+    //     // echo SITE_NOME; // Não posso usar em estruturas condicionais
+    // }
+   
+    // echo constant ('SITE_NOME');
     //Conteúdo
 ?>
