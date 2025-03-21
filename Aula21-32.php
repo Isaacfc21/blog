@@ -85,12 +85,12 @@
 <?php
     //Aula 030
 
-    require_once "sistema/configuracao.php";
-    include_once "helpers.php";
+    // require_once "sistema/configuracao.php";
+    // include_once "helpers.php";
 
-    echo SITE_NOME;
-    echo '<hr>';
-    echo SITE_DESCRICAO; 
+    // echo SITE_NOME;
+    // echo '<hr>';
+    // echo SITE_DESCRICAO; 
 
     // if(true){
     //     // define('SITE_NOME','Isaac'); // Posso usar em estruturas condicionais
@@ -98,5 +98,19 @@
     // }
    
     // echo constant ('SITE_NOME');
+
+    //Conteúdo
+?>
+<?php
+    //Aula 031
+
+    require_once "sistema/configuracao.php";
+    include_once "helpers.php";
+
+    // var_dump($_SERVER);
+    // var_dump($_SERVER["SERVER_NAME"]);
+    var_dump(localhost());
+    echo url('admin');
+
     //Conteúdo
 ?>

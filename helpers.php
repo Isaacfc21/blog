@@ -1,6 +1,44 @@
 <?php
     #echo("Arquivo de Funções");
 
+/**
+ * Valida uma informação do servidor e implementa junto com uma URL
+ * @param string $url URL a ser trabalhada
+ * @return string endereço implementado junto com a URL
+ */
+
+function url(string $url): string
+{
+    $servidor = $_SERVER["SERVER_NAME"]; 
+    $ambiente = ($servidor == 'localhost' ? URL_DESENVOLVIMENTO : URL_PRODUCAO);
+
+    if(str_starts_with($url, '/')){
+        return $ambiente.$url;
+    }
+    return $ambiente.'/'.$url;
+}
+
+/**
+ * Valida uma informação do Servidor
+ * @return bool verifica se o endereço é existente ou não
+ */
+
+function localhost(): bool
+{
+    $servidor = $_SERVER["SERVER_NAME"];  
+    
+    if ($servidor == "localhost") {
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Valida uma URL sem Filtro
+ * @param string $url endereço a ser verificado
+ * @return bool url verificada 
+ */
+
 function validarURL(string $url): bool
 {
     if(mb_strlen($url < 10)){
@@ -15,11 +53,22 @@ function validarURL(string $url): bool
     return false;
 } 
 
+/**
+ * Valida uma URL com Filtro
+ * @param string $url endereço a ser verificado
+ * @return bool url verificada true ou false
+ */
+
 function validarURLComFiltro(string $url): bool
 {
     return filter_var($url, FILTER_VALIDATE_URL);
 }
 
+/**
+ * Valida um E-mail
+ * @param string $email email a ser verificado
+ * @return bool email verificado true ou false
+ */
 function validarEmail(string $email): bool
 {
     return filter_var($email, FILTER_VALIDATE_EMAIL);
