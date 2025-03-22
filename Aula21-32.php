@@ -104,13 +104,45 @@
 <?php
     //Aula 031
 
-    require_once "sistema/configuracao.php";
-    include_once "helpers.php";
+    // require_once "sistema/configuracao.php";
+    // include_once "helpers.php";
 
     // var_dump($_SERVER);
     // var_dump($_SERVER["SERVER_NAME"]);
-    var_dump(localhost());
-    echo url('admin');
+    // var_dump(localhost());
+    // echo url('admin');
+
+    //Conteúdo
+?>
+<?php
+    //Aula 032
+
+    require_once "sistema/configuracao.php";
+    include_once "helpers.php";
+ 
+    echo 'Boa tarde hoje é'.' '.dataAtual();
+
+    // $meses = array();
+    // $meses = ['Janeiro', 'Fevereiro', 'Março'];
+    // $meses = [
+    //    'j' => 'Janeiro',   
+    //     'Fevereiro', 
+    //     'Março'
+    // ];
+
+    // foreach($meses as $chave => $valor){
+    //     echo $chave.'<br>';
+    // } 
+
+    // echo '<hr>';
+    // echo $meses[0];
+    // echo '<hr>';
+    // var_dump($meses);
+
+    // echo '<hr>';
+    // echo $_SERVER['HTTP_HOST']; //Não se usa echo, e sim var_dmp, a não ser por um array.
+    // echo '<hr>'; 
+    // var_dump($_SERVER);
 
     //Conteúdo
 ?>

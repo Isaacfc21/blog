@@ -1,6 +1,40 @@
 <?php
     #echo("Arquivo de Funções");
 
+function dataAtual(): string
+{
+    $diaMes = date('d');
+    $diaSemana = date('w');
+    $mes = date('n') - 1;
+    $ano = date('Y');
+
+    $nomesDiasSemanas = [
+        'domingo', 
+        'segunda-feira', 
+        'terça-feira', 
+        'quarta-feira', 
+        'quinta-feira', 
+        'sexta-feira', 
+        'sábado'
+    ];
+    $nomesDiasMeses = [
+        'Janeiro', 
+        'Fevereiro',
+        'Março', 
+        'Abril', 
+        'Maio', 
+        'Junho', 
+        'Julho',
+        'Agosto',
+        'Setembro',
+        'Novembro',
+        'Dezembro'
+    ];
+
+    $dataFormatada = $nomesDiasSemanas[$diaSemana].', '.$diaMes.' de '.$nomesDiasMeses[$mes]. ' de '.$ano;
+    return $dataFormatada;
+}
+
 /**
  * Valida uma informação do servidor e implementa junto com uma URL
  * @param string $url URL a ser trabalhada
@@ -69,6 +103,7 @@ function validarURLComFiltro(string $url): bool
  * @param string $email email a ser verificado
  * @return bool email verificado true ou false
  */
+
 function validarEmail(string $email): bool
 {
     return filter_var($email, FILTER_VALIDATE_EMAIL);
@@ -173,5 +208,5 @@ function resumirTexto(string $texto, int $limite, string $continue = "..."): str
 
     $resumirTexto = mb_substr($textoLimpo, 0, mb_strrpos(mb_substr($textoLimpo, 0, $limite), ""));
 
-    return $resumirTexto . $continue;
+    return $resumirTexto.$continue;
 };
