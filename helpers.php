@@ -1,6 +1,11 @@
 <?php
     #echo("Arquivo de Funções");
 
+/**
+ * Retorna a data atual de acordo com o sistema Windows
+ * @return string retorna a data formatada  
+ */
+
 function dataAtual(): string
 {
     $diaMes = date('d');
