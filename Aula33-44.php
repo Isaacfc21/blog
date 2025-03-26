@@ -56,13 +56,27 @@
 <?php
     //Aula 037
 
+    // require_once 'sistema/configuracao.php';
+    // include_once 'helpers2.php';
+
+    // $cpf = '562.564.468-36';
+
+    // // echo $limparNumero = preg_replace('/[^0-9]/', '', $cpf);
+    // var_dump(validarCPF($cpf));
+    
+    //Conteúdo
+?>
+<?php
+    //Aula 038 e 039 e 040
+
     require_once 'sistema/configuracao.php';
     include_once 'helpers2.php';
+    include_once 'sistema/Nucleo/Mensagem.php';
 
-    $cpf = '562.564.468-36';
-
-    // echo $limparNumero = preg_replace('/[^0-9]/', '', $cpf);
-    var_dump(validarCPF($cpf));
+    $msg = new Mensagem();
+    echo $msg->renderizar();
+    echo '<hr>';
+    var_dump($msg);
     
     //Conteúdo
 ?>
