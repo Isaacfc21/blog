@@ -10,13 +10,65 @@ class Mensagem
     private $css;
 
     /**
+     * Método de mensagem de sucesso
+     * @param string mensagem a ser renderizada para sucesso
+     * @return Mensagem exibida
+     */
+
+    public function sucesso(string $mensagem): Mensagem
+    {
+        $this->css = 'alert alert-success';
+        $this->texto = $this->filtrar($mensagem);
+        return $this;
+    }
+
+    /**
+     * Método de mensagem de erro
+     * @param string mensagem a ser renderizada para erro
+     * @return Mensagem exibida
+     */
+    
+    public function erro(string $mensagem): Mensagem
+    {
+        $this->css = 'alert alert-danger';
+        $this->texto = $this->filtrar($mensagem);
+        return $this;
+    }
+
+    /**
+     * Método de mensagem de alerta
+     * @param string mensagem a ser renderizada para alerta
+     * @return Mensagem exibida
+     */
+
+    public function alerta(string $mensagem): Mensagem
+    {
+        $this->css = 'alert alert-warning';
+        $this->texto = $this->filtrar($mensagem);
+        return $this;
+    }
+
+    /**
+     * Método de mensagem de informarção
+     * @param string mensagem a ser renderizada para informação
+     * @return Mensagem exibida
+     */
+
+    public function informa(string $mensagem): Mensagem
+    {
+        $this->css = 'alert alert-primary';
+        $this->texto = $this->filtrar($mensagem);
+        return $this;
+    }
+
+    /**
      * Método responsável pela renderização
-     * @return string renderizada
+     * @return string tag HTML renderizada
      */
 
     public function renderizar(): string
     {
-        return $this->texto = $this->filtrar('<h1>mensagem de teste');
+        return "<div class='{$this->css}'>{$this->texto}</div>";
     } 
 
     /**
