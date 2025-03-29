@@ -12,7 +12,7 @@ function validarCPF(string $cpf): bool
     $cpf = limparNumero($cpf);
 
     if(mb_strlen($cpf) != 11 || preg_match('/(\d)\1{10}/', $cpf)){
-        return false;
+        return false; 
     }
 
     // Esse loop FOR faz o cálculo dos dois digitos verificadores do CPF, no caso os dois últimos digitos do CPF
@@ -55,6 +55,12 @@ function validarCPF(string $cpf): bool
     }
     return true;
 }
+
+/**
+ * Limpa tudo o que não for um número
+ * @param string número a ser limpado
+ * @return string número limpo
+ */
 
 function limparNumero(string $numero): string
 {

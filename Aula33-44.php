@@ -89,15 +89,49 @@
 <?php
     //Aula 042
 
-    require_once 'sistema/configuracao.php';
-    include_once 'helpers2.php';
-    include_once 'sistema/Nucleo/Mensagem.php';
+    // require_once 'sistema/configuracao.php';
+    // include_once 'helpers2.php';
+    // include_once 'sistema/Nucleo/Mensagem.php';
     
-    // $msg = new Mensagem();
-    // echo $msg->sucesso('Mensagem de sucesso')->renderizar();
-    // echo (new Mensagem())->erro("Mensagem de Erro")->renderizar();
+    // // $msg = new Mensagem();
+    // // echo $msg->sucesso('Mensagem de sucesso')->renderizar();
+    // // echo (new Mensagem())->erro("Mensagem de Erro")->renderizar();
 
-    echo(new Mensagem());
+    // echo(new Mensagem())->sucesso("Mensagem de sucesso");
+    // echo '<hr>'; 
+    
+    //Conteúdo
+?>
+<?php
+    //Aula 043
+
+    // require_once 'sistema/configuracao.php';
+    // include_once 'helpers2.php';
+    // include_once 'sistema/Nucleo/Mensagem.php';
+
+    // use sistema\Nucleo\Mensagem as msg;
+
+    // // echo(new \sistema\Nucleo\Mensagem())->sucesso("Mensagem de sucesso");
+    // echo(new msg)->sucesso("Mensagem de sucesso");
+    // echo '<hr>'; 
+    
+    //Conteúdo
+?>
+<?php
+    //Aula 044
+
+    require_once 'sistema/configuracao.php';
+    include_once 'sistema/Nucleo/helpers2.php';
+    include_once 'sistema/Nucleo/class_helpers.php';
+    include_once 'sistema/Nucleo/Mensagem.php';
+
+    use sistema\Nucleo\Helpers;
+
+    echo Helpers::limparNumero('122343413434sdf');
+
+    // $helper = new Helpers();
+    // $helper->validarCPF('56256446836');
+
     echo '<hr>'; 
     
     //Conteúdo

@@ -1,5 +1,7 @@
 <?php
 
+namespace sistema\Nucleo; 
+
 /**
  * @author Isaac Dias Luz Caraça <isaaccaracayahoo@gmail.com>
  */
@@ -8,6 +10,16 @@ class Mensagem
 {
     private $texto;
     private $css;
+
+    /**
+     * Método que converte nessa situação uma classe para string
+     * @return string a div exibida no browser
+     */
+
+    public function __toString()
+    {
+        return $this->renderizar();
+    }
 
     /**
      * Método de mensagem de sucesso
