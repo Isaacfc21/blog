@@ -2,7 +2,7 @@
 
 namespace sistema\Nucleo;
 
-class Helpers
+class Helpers_c
 {
     #echo("Arquivo de Funções");
 

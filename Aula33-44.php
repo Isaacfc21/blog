@@ -125,7 +125,7 @@
     include_once 'sistema/Nucleo/class_helpers.php';
     include_once 'sistema/Nucleo/Mensagem.php';
 
-    use sistema\Nucleo\Helpers;
+    use sistema\Nucleo\Helpers;  
 
     echo Helpers::limparNumero('122343413434sdf');
 
