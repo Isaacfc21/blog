@@ -8,6 +8,8 @@
     
     define("URL_PRODUCAO", 'http://unset.com.br');
     define("URL_DESENVOLVIMENTO", 'http://localhost:3000/Aula21-32.php');
+
+    define('URL_SITE', "Aula44-55.php/");
     // const SITE_NOME1 = 'UnSet';
 
 ?> 
