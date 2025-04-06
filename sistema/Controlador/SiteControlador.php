@@ -2,18 +2,30 @@
 
 namespace sistema\Controlador;
 
+use sistema\Nucleo\Controlador;
+
 /**
  * Description of SiteControlador
  * 
  * @author Isaac
  */
 
-class SiteControlador
+class SiteControlador extends Controlador
 {
+
+    public function __construct()
+    {
+        parent::__construct('templates/site/views');
+    }
+
     public function index():void
     {
-        echo 'pagina index';
+        echo $this->template->renderizar('index.html', [
+            'título' => 'teste de titulo',
+            'subtítulo' => 'teste de subtítulo'
+        ]);
     }
+
     public function sobre():void
     {
         echo 'pagina sobre';
