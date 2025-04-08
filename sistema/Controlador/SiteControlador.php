@@ -28,7 +28,10 @@ class SiteControlador extends Controlador
 
     public function sobre():void
     {
-        echo 'pagina sobre';
+        echo $this->template->renderizar('sobre.html', [
+            'título' => 'Sobre nós',
+            'descrição' => 'Esta é uma página sobre o nosso projeto do TCE'
+        ]);
     }
 }
 
