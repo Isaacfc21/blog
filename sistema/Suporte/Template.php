@@ -2,6 +2,8 @@
 
 namespace sistema\Suporte;
 use Twig\Lexer;
+use \sistema\Nucleo\Helpers_c;
+
 /**
  * Class Template
  * 
@@ -18,7 +20,7 @@ class Template
         $this->twig = new \Twig\Environment($loader);
 
         $lexer = new Lexer($this->twig, array(
-            $this->helpers() 
+            $this->helpers()
         ));
         $this->twig->setLexer($lexer);
     }
@@ -31,9 +33,24 @@ class Template
     private function helpers():void
     {
         array(
-            $this->twig 
-        )
+            $this->twig->addFunction(
+                new \Twig\TwigFunction('url', function(?string $url = null){
+                    return Helpers_c::url($url);
+                })
+            ),
+            $this->twig->addFunction(
+                new \Twig\TwigFunction('saudacao_switch', function(){
+                    return Helpers_c::saudacao_switch();
+                })
+            ),
+            $this->twig->addFunction(
+                new \Twig\TwigFunction('resumirTexto', function(string $texto, int $limite = 100){
+                    return Helpers_c::resumirTexto($texto, $limite);
+                })
+                    
+            )
+        );
     }
 }
 
-?>
+?>  

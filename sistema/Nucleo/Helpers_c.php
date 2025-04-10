@@ -154,6 +154,38 @@ public static function slug(string $string): string
     return strtolower($slug);
 }
 
+
+
+/**
+ * Valida uma informação do servidor e implementa junto com uma URL
+ * @param string $url URL a ser trabalhada
+ * @return string endereço implementado junto com a URL
+ */
+
+public static function url(?string $url = null): string
+{
+     $servidor = $_SERVER["SERVER_NAME"]; 
+     $ambiente = ($servidor == 'localhost' ? URL_DESENVOLVIMENTO : URL_PRODUCAO);
+
+     if (str_starts_with($url, '/')) {
+         return $ambiente . $url;
+     }
+     return $ambiente . '/' . $url;
 }
+
+public static function resumirTexto(string $texto, int $limite, string $continue = "..."): string
+{
+    $textoLimpo = trim(strip_tags($texto));
+
+    if (mb_strlen($textoLimpo) <= $limite) {
+        return $textoLimpo;
+    }
+
+    $resumirTexto = mb_substr($textoLimpo, 0, mb_strrpos(mb_substr($textoLimpo, 0, $limite), ""));
+
+    return $resumirTexto.$continue;
+}
+
+} 
 
 ?>
