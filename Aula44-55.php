@@ -37,7 +37,7 @@
     // include_once 'sistema/Nucleo/class_helpers.php';
     // include 'sistema/Nucleo/Mensagem.php';
     // include 'sistema/Nucleo/controlador.php';
-    require 'vendor/autoload.php';
+    // require 'vendor/autoload.php';
 
     //Aprendi a baixar, usar e remover uma biblioteca do Packagist.org
 
@@ -50,8 +50,8 @@
     // include_once 'sistema/Nucleo/class_helpers.php';
     // include 'sistema/Nucleo/Mensagem.php';
     // include 'sistema/Nucleo/controlador.php';
-    require 'vendor/autoload.php';
-    require 'rotas.php';
+    // require 'vendor/autoload.php';
+    // require 'rotas.php';
 
     //Conteúdo
 ?>

@@ -19,10 +19,10 @@ class Template
         $loader = new \Twig\Loader\FilesystemLoader($diretorio);
         $this->twig = new \Twig\Environment($loader);
 
-        $lexer = new Lexer($this->twig, array(
-            $this->helpers()
-        ));
-        $this->twig->setLexer($lexer);
+        // $lexer = new Lexer($this->twig, array(
+            $this->helpers();
+        // ));
+        // $this->twig->setLexer($lexer);
     }
 
     public function renderizar(string $view, array $dados)
@@ -46,8 +46,7 @@ class Template
             $this->twig->addFunction(
                 new \Twig\TwigFunction('resumirTexto', function(string $texto, int $limite = 100){
                     return Helpers_c::resumirTexto($texto, $limite);
-                })
-                    
+                })   
             )
         );
     }

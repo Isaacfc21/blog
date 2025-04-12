@@ -21,16 +21,16 @@ class SiteControlador extends Controlador
     public function index():void
     {
         echo $this->template->renderizar('index.html', [
-            'título' => 'teste de titulo',
-            'subtítulo' => 'teste de subtítulo'
+            'titulo' => 'Página Inicial',
+            'subtitulo' => 'teste de subtítulo'
         ]);
     }
 
     public function sobre():void
     {
         echo $this->template->renderizar('sobre.html', [
-            'título' => 'Sobre nós',
-            'descrição' => 'Esta é uma página sobre o nosso projeto do TCE'
+            'titulo' => 'Sobre nós',
+            'descricao' => 'Esta é uma página sobre o nosso projeto do TCE'
         ]);
     }
 }
