@@ -5,9 +5,9 @@ use Twig\Lexer;
 use \sistema\Nucleo\Helpers_c;
 
 /**
- * Class Template
+ * Class Controlador
  * 
- * @author Isaac
+ * @author Isaac Caraça <isaaccaracayahoo@gmail.com>
  */
 
 class Template

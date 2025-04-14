@@ -2,22 +2,40 @@
 
 namespace sistema\Nucleo;
 
+use Exception;
+
+/**
+ * Class Helpers_c
+ * 
+ * @author Isaac Caraça <isaaccaracayahoo@gmail.com>
+ */
+
 class Helpers_c
 {
     #echo("Arquivo de Funções");
+
+
+public static function redirecionar(?string $url = null):void
+{
+    header('HTTP/1.1 302 Found');
+
+    $local = ($url ? self::url($url) : self::url());
+
+    header("Location: {$local} ");
+    exit();
+}
 
 /**
  * Valida um número de CPF
  * @param string $cpf a ser calculado os últimos dois dígitos
  * @return bool CPF Válido ou não
  */
-
 public static function validarCPF(string $cpf): bool
 {
     $cpf = self::limparNumero($cpf);
 
     if(mb_strlen($cpf) != 11 || preg_match('/(\d)\1{10}/', $cpf)){
-        return false; 
+        throw new Exception("O CPF precisa ter 11 dígitos"); 
     }
 
     // Esse loop FOR faz o cálculo dos dois digitos verificadores do CPF, no caso os dois últimos digitos do CPF
@@ -55,7 +73,7 @@ public static function validarCPF(string $cpf): bool
         $d = ((10 * $d) % 11) % 10;
 
         if($cpf[$c] != $d){
-            return false;
+            throw new Exception("CPF Inválido!");
         }
     }
     return true;
@@ -186,6 +204,16 @@ public static function resumirTexto(string $texto, int $limite, string $continue
     return $resumirTexto.$continue;
 }
 
-} 
+public static function localhost(): bool
+{
+    $servidor = $_SERVER["SERVER_NAME"];  
+    
+    if ($servidor == "localhost") {
+        return true;
+    }
+    return false;
+}
+
+}
 
 ?>
