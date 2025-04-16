@@ -10,10 +10,10 @@ try{
     SimpleRouter::get(URL_SITE.'404', 'SiteControlador@erro404');
     SimpleRouter::start();
 }catch (Pecee\SimpleRouter\Exceptions\NotFoundHttpException $ex){
-    if(Helpers_c::localhost()){
+    if(!Helpers_c::localhost()){
         echo $ex;
     }else{
-        Helpers_c::redirecionar('/Aula56-67.php/404');
+        Helpers_c::redirecionar('/Aula68-79.php/404');
     }
 }
 // SimpleRouter::setDefaultNamespace('sistema\Controlador');
