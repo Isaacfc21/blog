@@ -3,6 +3,8 @@
 namespace sistema\Controlador;
 
 use sistema\Nucleo\Controlador;
+use sistema\Modelo\PostModelo;
+use sistema\Nucleo\Helpers_c;
 
 /**
  * Description of SiteControlador
@@ -20,8 +22,9 @@ class SiteControlador extends Controlador
 
     public function index():void
     {
+        $posts = (new PostModelo())->busca();
         echo $this->template->renderizar('index.html', [
-            
+            'posts' => $posts
         ]);
     }
 
@@ -36,6 +39,16 @@ class SiteControlador extends Controlador
     {
         echo $this->template->renderizar('404.html', [
             'titulo' => 'Página não encontrada',
+        ]);
+    }
+    public function post(int $id):void
+    {
+        $post = (new PostModelo())->buscaporID($id);
+        if(!$post){
+            Helpers_c::redirecionar(URL_SITE . '404');
+        }
+        echo $this->template->renderizar('post.html', [
+            'post' => $post,
         ]);
     }
 }

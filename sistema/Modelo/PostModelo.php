@@ -11,18 +11,31 @@ use sistema\Nucleo\Conexao;
 
 class PostModelo
 {
-    public function ler():array
+    public function busca():array
     {
-        $query = "SELECT * FROM posts ";
+        // $query = "SELECT * FROM posts WHERE status = 1 ORDER BY id DESC";
+        $query = "SELECT * FROM posts";
         $stmt = Conexao::getInstancia()->query($query);
-
+        
         $resultado = $stmt->fetchAll();
-
-        // var_dump($resultado);
-
+        
+        
+        return $resultado;
+    }
+    public function buscaporID(int $id):bool|object
+    {
+        $query = "SELECT * FROM posts WHERE id = {$id}";
+        $stmt = Conexao::getInstancia()->query($query);
+        
+        $resultado = $stmt->fetch();
+        
+        
         return $resultado;
     }
 }
 
-
+// $query = "SELECT * FROM posts WHERE id = 3 AND status = 1 OR status = 0";
+// $query = "SELECT * FROM posts LIMIT 2 OFFSET 2";
+// $query = "SELECT * FROM posts WHERE titulo = 'titulo do post' ";
+// var_dump($resultado);
 ?>
