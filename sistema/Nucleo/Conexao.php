@@ -26,9 +26,8 @@ class Conexao
             }catch (PDOException $ex){
                 die('Erro ao conectar com o banco de dados: ' . $ex->getMessage());
             }
-
-            return self::$instancia;
         }
+        return self::$instancia;
     }
 
     protected function __construct()

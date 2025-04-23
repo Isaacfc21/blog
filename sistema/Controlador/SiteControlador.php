@@ -2,6 +2,7 @@
 
 namespace sistema\Controlador;
 
+use sistema\Modelo\CategoriaModelo;
 use sistema\Nucleo\Controlador;
 use sistema\Modelo\PostModelo;
 use sistema\Nucleo\Helpers_c;
@@ -23,8 +24,10 @@ class SiteControlador extends Controlador
     public function index():void
     {
         $posts = (new PostModelo())->busca();
+
         echo $this->template->renderizar('index.html', [
-            'posts' => $posts
+            'posts' => $posts,
+            'categorias' => $this->categorias(),
         ]);
     }
 
@@ -49,8 +52,23 @@ class SiteControlador extends Controlador
         }
         echo $this->template->renderizar('post.html', [
             'post' => $post,
+            'categorias' => $this->categorias(),
         ]);
+    }
+    public function categorias()
+    {
+        return (new CategoriaModelo())->busca();
     }
 }
 
+// public function categoria(int $id):void
+// {
+//     $categoria= (new CategoriaModelo())->buscaporID($id);
+//     if(!$categoria){
+//         Helpers_c::redirecionar(URL_SITE . '404');
+//     }
+//     echo $this->template->renderizar('categoria.html', [
+//         'categoria' => $categoria,
+//     ]);
+// }
 ?>

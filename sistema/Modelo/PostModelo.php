@@ -14,7 +14,7 @@ class PostModelo
     public function busca():array
     {
         // $query = "SELECT * FROM posts WHERE status = 1 ORDER BY id DESC";
-        $query = "SELECT * FROM posts";
+        $query = "SELECT * FROM posts WHERE status = 1 ORDER BY id DESC";
         $stmt = Conexao::getInstancia()->query($query);
         
         $resultado = $stmt->fetchAll();
@@ -28,7 +28,6 @@ class PostModelo
         $stmt = Conexao::getInstancia()->query($query);
         
         $resultado = $stmt->fetch();
-        
         
         return $resultado;
     }

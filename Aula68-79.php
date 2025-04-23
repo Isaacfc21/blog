@@ -14,7 +14,7 @@
     //Conteúdo
 ?>
 <?php
-    //Aula 071 e 073
+    //Aula 071-073
 
     require 'vendor/autoload.php';
     require 'rotas.php';
@@ -33,6 +33,5 @@
     // foreach ($categorias as $categoria){
     //      echo $categoria->titulo . "<br>";
     // }
-
     //Conteúdo
 ?>

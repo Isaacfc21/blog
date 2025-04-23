@@ -4,26 +4,32 @@ namespace sistema\Modelo;
 
 use sistema\Nucleo\Conexao;
 /**
- * Class PostModelo
+ * Class CategoriaModelo
  * 
  * @author Isaac Caraça <isaaccaracayahoo@gmail.com>
  */
 
 class CategoriaModelo
 {
-    public function ler(?int $id = null):array
+    public function busca():array
     {
-        $where = ($id ? "WHERE id = {$id}" : '' );
-        // $query = "SELECT * FROM categorias WHERE id = 3 AND status = 1 OR status = 0";
-        // $query = "SELECT * FROM categorias LIMIT 2 OFFSET 2";
-        // $query = "SELECT * FROM categorias WHERE titulo = 'titulo do post' ";
-        $query = "SELECT * FROM categorias {$where}";
+        // $query = "SELECT * FROM posts WHERE status = 1 ORDER BY id DESC";
+        $query = "SELECT * FROM categorias WHERE status = 1 ORDER BY titulo ASC";
         $stmt = Conexao::getInstancia()->query($query);
-
+        
         $resultado = $stmt->fetchAll();
-
-        // var_dump($resultado);
-
+        
+        
+        return $resultado;
+    }
+    public function buscaporID(int $id):bool|object
+    {
+        $query = "SELECT * FROM categorias WHERE id = {$id}";
+        $stmt = Conexao::getInstancia()->query($query);
+        
+        $resultado = $stmt->fetch();
+        
+        
         return $resultado;
     }
 }

@@ -3,9 +3,22 @@
 {% block conteudo %}
 
 <div class="container my-5">
-    <h1>{{post.titulo}}</h1>
-    <hr>
-    <p>{{post.texto}}</p>
+    <div class="row">
+        <div class="col-lg-9 col-md-12">
+        
+        <div class="row">
+            <h1>{{post.titulo}}</h1>
+            <hr>
+            <p>{{post.texto}}</p>
+        </div>
+        
+        </div>
+
+        <div class="col-lg-3">
+            {% include 'sidebar.html' %}
+        </div>
+    </div>
 </div>
+
 
 {% endblock %}
