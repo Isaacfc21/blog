@@ -3,7 +3,7 @@ Options -indexes
 
 RewriteEngine ON
 
-RewriteBase /blog 
+RewriteBase /blog/
 
 
 RewriteCond %{SCRIPT_FILENAME} !-f

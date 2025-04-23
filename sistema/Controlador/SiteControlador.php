@@ -55,6 +55,18 @@ class SiteControlador extends Controlador
             'categorias' => $this->categorias(),
         ]);
     }
+    public function categoria(int $id):void
+    {
+        $posts = (new CategoriaModelo())->posts($id);
+
+        if(!$posts){
+            Helpers_c::redirecionar(URL_SITE . '404');
+        }
+        echo $this->template->renderizar('categoria.html', [
+            'posts' => $posts,
+            'categorias' => $this->categorias(),
+        ]);
+    }
     public function categorias()
     {
         return (new CategoriaModelo())->busca();
