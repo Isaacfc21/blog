@@ -71,6 +71,20 @@ class SiteControlador extends Controlador
     {
         return (new CategoriaModelo())->busca();
     }
+    public function buscar():void
+    {
+        $busca = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+
+        if(isset($busca)){
+            $posts = (new PostModelo())->pesquisa($busca['busca']);
+            // var_dump($posts);
+        }
+        echo $this->template->renderizar('busca.html', [
+            'posts' => $posts,
+            'categorias' => $this->categorias(),
+        ]);
+        // echo $busca['busca'];
+    }
 }
 
 // public function categoria(int $id):void
