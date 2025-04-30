@@ -71,20 +71,28 @@ class SiteControlador extends Controlador
     {
         return (new CategoriaModelo())->busca();
     }
-    public function buscar():void
+    public function buscar(): void
     {
-        $busca = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        $busca = filter_input(INPUT_POST, 'busca', FILTER_DEFAULT);
 
-        if(isset($busca)){
-            $posts = (new PostModelo())->pesquisa($busca['busca']);
-            // var_dump($posts);
+        if ($busca) {
+            $posts = (new PostModelo())->pesquisa($busca);
+
+            if ($posts && count($posts) > 0) {
+                foreach ($posts as $post) {
+                    echo "<li class='list-group-item fw-bold'>
+                            <a href='" . Helpers_c::url('/Aula68-79.php/post/') . $post->id . "' class='link_post'>
+                                $post->titulo
+                            </a>
+                        </li>";
+                }
+            } else {
+                // Retorna uma string clara para o JS detectar
+                echo "<li class='nenhum-resultado'></li>";
+            }
         }
-        echo $this->template->renderizar('busca.html', [
-            'posts' => $posts,
-            'categorias' => $this->categorias(),
-        ]);
-        // echo $busca['busca'];
     }
+
 }
 
 // public function categoria(int $id):void
