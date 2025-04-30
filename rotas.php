@@ -11,6 +11,11 @@ try{
     SimpleRouter::get(URL_SITE.'post/{id}', 'SiteControlador@post');
     SimpleRouter::get(URL_SITE.'categoria/{id}', 'SiteControlador@categoria');
     SimpleRouter::post(URL_SITE.'buscar', 'SiteControlador@buscar');
+
+    SimpleRouter::group(['namespace' => 'Admin'], function () {
+        SimpleRouter::get(URL_ADMIN.'dashboard', 'AdminDashboard@dashboard');
+    });
+
     SimpleRouter::start();
 }catch (Pecee\SimpleRouter\Exceptions\NotFoundHttpException $ex){
     if(!Helpers_c::localhost()){
