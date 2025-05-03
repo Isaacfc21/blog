@@ -10,9 +10,21 @@
       </header>
 
       <section class="content">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                  <a id="nav_a" href="{{url('Aula80-91.php/admin/dashboard')}}">
+                      Home
+                  </a>
+              </li>
+              <li id="nav_li" class="breadcrumb-item active" aria-current="page">
+                  Posts
+              </li>
+          </ol>
+        </nav>
         <div class="card border-0 shadow-sm">
             <div class="card-header bg-white border-0">
-                <h5 class="card-title">Posts</h5>
+              <a href="{{url('/Aula80-91.php/admin/posts/cadastrar')}}" id="btn_cadastrar" class="btn btn-primary">Cadastrar</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -38,6 +50,7 @@
                                             <span class="badge bg-danger">Inativo</span>
                                         {% endif %}
                                     </td>
+                                    <td></td>
                                 </tr>
                             {% endfor %}
                           

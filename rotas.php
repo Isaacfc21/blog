@@ -14,13 +14,19 @@ try{
 
     SimpleRouter::group(['namespace' => 'Admin'], function () {
         SimpleRouter::get(URL_ADMIN.'dashboard', 'AdminDashboard@dashboard');
+
+        //ADMIN POSTS
         SimpleRouter::get(URL_ADMIN.'posts/listar', 'AdminPosts@listar');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN.'posts/cadastrar', 'AdminPosts@cadastrar');
+
+        //ADMIN CATEGORIAS
         SimpleRouter::get(URL_ADMIN.'categorias/listar', 'AdminCategorias@listar');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN.'categorias/cadastrar', 'AdminCategorias@cadastrar');
     });
 
     SimpleRouter::start();
 }catch (Pecee\SimpleRouter\Exceptions\NotFoundHttpException $ex){
-    if(!Helpers_c::localhost()){
+    if(Helpers_c::localhost()){
         echo $ex;
     }else{
         Helpers_c::redirecionar('/Aula80-91.php/404');

@@ -2,7 +2,6 @@
 
 namespace sistema\Controlador\Admin;
 use sistema\Modelo\PostModelo;
-use sistema\Modelo\CategoriaModelo;
 
 /**
  * Class AdminPosts
@@ -17,6 +16,10 @@ class AdminPosts extends AdminControlador
         echo $this->template->renderizar('posts/listar.html', [
             'posts' => (new PostModelo())->busca(),
         ]);
+    }
+    public function cadastrar():void
+    {
+        echo $this->template->renderizar('posts/formulario_p.html', []);
     }
 }
 
