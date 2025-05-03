@@ -1,0 +1,51 @@
+{% extends 'dashboard.html' %}
+
+{% block conteudo %}
+    <div class="main" id="main">
+      <header>
+        <span class="menu-toggle" id="menu-toggle">&#9776;</span>
+        <div class="user-info">
+          <span class="icon">👤</span> Isaac Dias
+        </div>
+      </header>
+
+      <section class="content">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-white border-0">
+                <h5 class="card-title">Posts</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Título</th>
+                            <th scope="col">Texto</th>
+                            <th scope="col">Status</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for post in posts %}
+                                <tr>
+                                    <th scope="row">{{post.id}}</th>
+                                    <td>{{post.titulo}}</td>
+                                    <td>{{resumirTexto(post.texto, 150)}}</td>
+                                    <td>
+                                        {% if post.status == 1 %}
+                                            <span class="badge bg-success">Ativo</span>
+                                        {% else %}
+                                            <span class="badge bg-danger">Inativo</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                          
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+      </section>
+    </div>
+{% endblock %}
