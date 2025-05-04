@@ -51,7 +51,9 @@
                                             <span class="badge bg-danger">Inativo</span>
                                         {% endif %}
                                     </td>
-                                    <td></td>
+                                    <td>
+                                        <a class="editar" href="{{url('Aula80-91.php/admin/categorias/editar/'~categoria.id)}}">Editar</a>
+                                    </td>
                                 </tr>
                             {% endfor %}
                           

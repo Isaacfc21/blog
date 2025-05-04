@@ -116,6 +116,10 @@ header{
     text-decoration: none;
     color: #000;
 }
+.editar{
+    text-decoration: none;
+    color: #000;
+}
 /* #overlay{
   position: fixed;
   top: 0;
