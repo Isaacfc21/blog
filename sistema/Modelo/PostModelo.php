@@ -42,6 +42,12 @@ class PostModelo
         
         return $resultado;
     }
+    public function armazenar(array $dados):void
+    {
+        $query = "INSERT INTO `posts` (`categoria_id`, `titulo`, `texto`, `status`) VALUES (:categoria_id, :titulo, :texto, :status);";
+        $stmt = Conexao::getInstancia()->prepare($query);
+        $stmt->execute($dados);
+    }
 }
 
 // $query = "SELECT * FROM posts WHERE id = 3 AND status = 1 OR status = 0";

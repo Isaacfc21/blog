@@ -2,6 +2,8 @@
 
 namespace sistema\Controlador\Admin;
 use sistema\Modelo\PostModelo;
+use sistema\Modelo\CategoriaModelo;
+use sistema\Nucleo\Helpers_c;
 
 /**
  * Class AdminPosts
@@ -19,7 +21,15 @@ class AdminPosts extends AdminControlador
     }
     public function cadastrar():void
     {
-        echo $this->template->renderizar('posts/formulario_p.html', []);
+        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        if(isset($dados)){
+            (new PostModelo())->armazenar($dados);
+            Helpers_c::redirecionar('Aula80-91.php/admin/posts/listar');
+        }
+
+        echo $this->template->renderizar('posts/formulario_p.html', [
+            'categorias' => (new CategoriaModelo())->busca(),
+        ]);
     }
 }
 

@@ -2,6 +2,7 @@
 
 namespace sistema\Controlador\Admin;
 use sistema\Modelo\CategoriaModelo;
+use sistema\Nucleo\Helpers_c;
 
 /**
  * Class AdminCategorias
@@ -21,7 +22,8 @@ class AdminCategorias extends AdminControlador
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if(isset($dados)){
-            
+            (new CategoriaModelo())->armazenar($dados);
+            Helpers_c::redirecionar('Aula80-91.php/admin/categorias/listar');
         }
         
         echo $this->template->renderizar('posts/formulario_c.html', []);
