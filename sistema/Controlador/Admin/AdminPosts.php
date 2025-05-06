@@ -15,13 +15,20 @@ class AdminPosts extends AdminControlador
 {
     public function listar():void
     {
+        $post = new PostModelo();
         echo $this->template->renderizar('posts/listar.html', [
-            'posts' => (new PostModelo())->busca(),
+            'posts' => $post->busca(),
+            'total' => [
+                'total' => $post->total(),
+                'ativo' => $post->total('status = 1'),
+                'inativo' => $post->total('status = 0')
+            ]
         ]);
     }
     public function cadastrar():void
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        
         if(isset($dados)){
             (new PostModelo())->armazenar($dados);
             Helpers_c::redirecionar('Aula80-91.php/admin/posts/listar');
@@ -36,8 +43,9 @@ class AdminPosts extends AdminControlador
         $post = (new PostModelo())->buscaPorId($id);
 
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+
         if(isset($dados)){
-            // (new PostModelo())->armazenar($dados);
+            (new PostModelo())->atualizar($dados, $id);
             Helpers_c::redirecionar('Aula80-91.php/admin/posts/listar');
         }
 
@@ -48,6 +56,11 @@ class AdminPosts extends AdminControlador
             'post' => $post,
             'categorias' => (new CategoriaModelo())->busca(),
         ]);
+    }
+    public function deletar(int $id):void
+    {
+        (new PostModelo())->deletar($id);
+            Helpers_c::redirecionar('Aula80-91.php/admin/posts/listar');
     }
 }
 

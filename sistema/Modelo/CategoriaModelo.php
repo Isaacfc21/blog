@@ -11,10 +11,11 @@ use sistema\Nucleo\Conexao;
 
 class CategoriaModelo
 {
-    public function busca():array
+    public function busca(?string $termo = null):array
     {
+        $termo =  ($termo ? "WHERE {$termo}" : '');
         // $query = "SELECT * FROM posts WHERE status = 1 ORDER BY id DESC";
-        $query = "SELECT * FROM categorias WHERE status = 1 ORDER BY titulo ASC";
+        $query = "SELECT * FROM categorias {$termo}";
         $stmt = Conexao::getInstancia()->query($query);
         
         $resultado = $stmt->fetchAll();
@@ -53,6 +54,31 @@ class CategoriaModelo
             $dados['texto'],
             $dados['status']
         ]);
+    }
+    public function atualizar(array $dados, int $id):void
+    {
+        $query = "UPDATE categorias SET titulo = ?, texto = ?, status = ? WHERE id = ?";
+        $stmt = Conexao::getInstancia()->prepare($query);
+        $stmt->execute([
+            $dados['titulo'],
+            $dados['texto'],
+            $dados['status'],
+            $id
+        ]);
+    }
+    public function deletar(int $id):void
+    {
+        $query = "DELETE FROM `categorias` WHERE id = {$id}";
+        $stmt = Conexao::getInstancia()->prepare($query);
+        $stmt->execute();
+    }
+    public function total(?string $termo = null):int
+    {
+        $termo =  ($termo ? "WHERE {$termo}" : '');
+        $query = "SELECT * FROM categorias {$termo}";
+        $stmt = Conexao::getInstancia()->prepare($query);
+        $stmt->execute();
+        return $stmt->rowCount();
     }
 }
 

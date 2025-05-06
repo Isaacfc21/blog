@@ -1,13 +1,14 @@
-:root {
+:root{
     --sidebar-width: 250px;
     --sidebar-collapsed: 70px;
     --header-collapsed: 70px;
     --main-color: #2f3e58;
     --text-color: #ecf0f1;
     --transition: 0.3s ease;
-  }
+} 
+
   
-* {
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -20,7 +21,7 @@ body{
 }
 
 /* Sidebar */
-.sidebar {
+.sidebar{
     position: fixed;
     width: 250px; /* ou 345px, se preferir */
     height: 100%;
@@ -29,7 +30,7 @@ body{
     top: 0;
     z-index: 100;
     transition: width 0.3s; /* ADICIONE ESTA LINHA */
-  }
+}
   
 
 .sidebar.collapsed{
@@ -120,6 +121,26 @@ header{
     text-decoration: none;
     color: #000;
 }
+.acao {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+.acao a{
+    padding: 5px 10px;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    font-size: 14px;
+}
+table th, table td{
+    text-align: left;
+    vertical-align: middle;
+    padding: 12px 15px;
+}
+  
+
+
 /* #overlay{
   position: fixed;
   top: 0;

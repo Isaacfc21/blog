@@ -14,8 +14,14 @@ class AdminCategorias extends AdminControlador
 {
     public function listar():void
     {
+        $categoria = new CategoriaModelo();
         echo $this->template->renderizar('posts/categoria.html', [
-            'categorias' => (new CategoriaModelo())->busca(),
+            'categorias' => $categoria->busca(),
+            'total' => [
+                'total' => $categoria->total(),
+                'ativo' => $categoria->total('status = 1'),
+                'inativo' => $categoria->total('status = 0')
+            ]
         ]);
     }
     public function cadastrar():void
@@ -34,7 +40,7 @@ class AdminCategorias extends AdminControlador
         
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if(isset($dados)){
-            // (new CategoriaModelo())->armazenar($dados);
+            (new CategoriaModelo())->atualizar($dados, $id);
             Helpers_c::redirecionar('Aula80-91.php/admin/categorias/listar');
         }
 
@@ -44,6 +50,11 @@ class AdminCategorias extends AdminControlador
         echo $this->template->renderizar('posts/formulario_c.html', [
             'categoria' => $categoria,
         ]);
+    }
+    public function deletar(int $id):void
+    {
+        (new CategoriaModelo())->deletar($id);
+            Helpers_c::redirecionar('Aula80-91.php/admin/categorias/listar');
     }
 }
 
