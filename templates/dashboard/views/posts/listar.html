@@ -24,7 +24,11 @@
         </nav>
         <div class="card border-0 shadow-sm">
             <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
-              Total de Posts = {{total.total}} - ativos = {{total.ativo}} - inativos {{total.inativo}}
+              <div class="card-header bg-white border-0">
+                <span class="badge text-bg-secondary">{{total.total}} Posts</span>
+                <span class="badge text-bg-success">{{total.ativo}} Ativos</span>
+                <span class="badge text-bg-danger">{{total.inativo}} Inativos</span>
+              </div>
               <a href="{{url('/Aula80-91.php/admin/posts/cadastrar')}}" id="btn_cadastrar" class="btn btn-primary">Cadastrar</a>
             </div>
             <div class="card-body">
