@@ -15,8 +15,8 @@
     define("URL_PRODUCAO", 'http://unset.com.br');
     define("URL_DESENVOLVIMENTO", 'http://localhost:3000');
 
-    define('URL_SITE', "Aula80-91.php/");
-    define('URL_ADMIN', "Aula80-91.php/admin/");
+    define('URL_SITE', "Aula92-103.php/");
+    define('URL_ADMIN', "Aula92-103.php/admin/");
     
     // const SITE_NOME1 = 'UnSet';
 

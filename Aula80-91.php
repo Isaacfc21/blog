@@ -36,28 +36,28 @@
 <?php
     //Aula 091
 
-    require 'vendor/autoload.php';
-    // require 'rotas.php';
-    $sessao = new sistema\Nucleo\Sessao();
+    // require 'vendor/autoload.php';
+    // // require 'rotas.php';
+    // $sessao = new sistema\Nucleo\Sessao();
 
-    // $sessao->criar('usuario', [
-    //     'id' => 10,
-    //     'nome' => 'Isaac Caraça'
-    // ]);
+    // // $sessao->criar('usuario', [
+    // //     'id' => 10,
+    // //     'nome' => 'Isaac Caraça'
+    // // ]);
 
-    // $sessao->criar('nome', 'Isaac Caraça');
+    // // $sessao->criar('nome', 'Isaac Caraça');
 
-    var_dump($sessao->carregar());
-    echo '<hr>';
-    // var_dump($sessao->carregar()->usuario->id);
+    // var_dump($sessao->carregar());
     // echo '<hr>';
-    // var_dump($sessao->carregar()->usuario->nome);
+    // // var_dump($sessao->carregar()->usuario->id);
+    // // echo '<hr>';
+    // // var_dump($sessao->carregar()->usuario->nome);
+    // // echo '<hr>';
+    // var_dump($sessao->checar('nome'));
+    // // echo '<hr>';
+    // // $sessao->limpar('usuario');
     // echo '<hr>';
-    var_dump($sessao->checar('nome'));
-    // echo '<hr>';
-    // $sessao->limpar('usuario');
-    echo '<hr>';
-    $sessao->deletar();
+    // $sessao->deletar();
     // var_dump($sessao->checar('usuario'));
     //Conteúdo
 ?>

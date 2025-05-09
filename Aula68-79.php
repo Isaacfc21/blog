@@ -65,8 +65,8 @@
 <?php
     //Aula 077-079
 
-    require 'vendor/autoload.php';
-    require 'rotas.php';
+    // require 'vendor/autoload.php';
+    // require 'rotas.php';
 
     //Conteúdo
 ?>
