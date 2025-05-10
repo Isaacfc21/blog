@@ -3,26 +3,32 @@
 namespace sistema\Modelo;
 
 use sistema\Nucleo\Conexao;
+use sistema\Nucleo\Modelo;
+
 /**
  * Class CategoriaModelo
  * 
  * @author Isaac Caraça <isaaccaracayahoo@gmail.com>
  */
 
-class CategoriaModelo
+class CategoriaModelo extends Modelo
 {
-    public function busca(?string $termo = null):array
+    public function __construct()
     {
-        $termo =  ($termo ? "WHERE {$termo}" : '');
-        // $query = "SELECT * FROM posts WHERE status = 1 ORDER BY id DESC";
-        $query = "SELECT * FROM categorias {$termo}";
-        $stmt = Conexao::getInstancia()->query($query);
-        
-        $resultado = $stmt->fetchAll();
-        
-        
-        return $resultado;
+        parent::__construct('categorias');
     }
+    // public function busca(?string $termo = null):array
+    // {
+    //     $termo =  ($termo ? "WHERE {$termo}" : '');
+    //     // $query = "SELECT * FROM posts WHERE status = 1 ORDER BY id DESC";
+    //     $query = "SELECT * FROM categorias {$termo}";
+    //     $stmt = Conexao::getInstancia()->query($query);
+        
+    //     $resultado = $stmt->fetchAll();
+        
+        
+    //     return $resultado;
+    // }
     public function buscaporID(int $id):bool|object
     {
         $query = "SELECT * FROM categorias WHERE id = {$id}";

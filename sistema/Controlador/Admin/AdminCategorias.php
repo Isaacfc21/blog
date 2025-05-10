@@ -16,7 +16,7 @@ class AdminCategorias extends AdminControlador
     {
         $categoria = new CategoriaModelo();
         echo $this->template->renderizar('posts/categoria.html', [
-            'categorias' => $categoria->busca(),
+            'categorias' => $categoria->busca()->ordem('status DESC, id DESC')->resultado(true),
             'total' => [
                 'total' => $categoria->total(),
                 'ativo' => $categoria->total('status = 1'),

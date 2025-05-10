@@ -3,26 +3,32 @@
 namespace sistema\Modelo;
 
 use sistema\Nucleo\Conexao;
+use sistema\Nucleo\Modelo;
 /**
  * Class PostModelo
  * 
  * @author Isaac Caraça <isaaccaracayahoo@gmail.com>
  */
 
-class PostModelo
+class PostModelo extends Modelo
 {
-    public function busca(?string $termo = null):array
+    public function __construct()
     {
-        $termo =  ($termo ? "WHERE {$termo}" : '');
-        // $query = "SELECT * FROM posts WHERE status = 1 ORDER BY id DESC";
-        $query = "SELECT * FROM posts {$termo}";
-        $stmt = Conexao::getInstancia()->query($query);
-        
-        $resultado = $stmt->fetchAll();
-        
-        
-        return $resultado;
+        parent::__construct('posts');
     }
+    // public function busca(?string $termo = null, ?string $ordem = null):array
+    // {
+    //     $termo =  ($termo ? "WHERE {$termo}" : '');
+    //     $ordem =  ($ordem ? "ORDER BY {$ordem}" : '');
+    //     // $query = "SELECT * FROM posts WHERE status = 1 ORDER BY id DESC";
+    //     $query = "SELECT * FROM posts {$termo} {$ordem}";
+    //     $stmt = Conexao::getInstancia()->query($query);
+        
+    //     $resultado = $stmt->fetchAll();
+        
+        
+    //     return $resultado;
+    // }
     public function buscaporID(int $id):bool|object
     {
         $query = "SELECT * FROM posts WHERE id = {$id}";
