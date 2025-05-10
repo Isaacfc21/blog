@@ -59,5 +59,6 @@
     // echo '<hr>';
     // $sessao->deletar();
     // var_dump($sessao->checar('usuario'));
+    
     //Conteúdo
 ?>

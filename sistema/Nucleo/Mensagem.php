@@ -3,6 +3,8 @@
 namespace sistema\Nucleo; 
 
 /**
+ * Class Mensagem
+ * 
  * @author Isaac Dias Luz Caraça <isaaccaracayahoo@gmail.com>
  */
 
@@ -29,7 +31,7 @@ class Mensagem
 
     public function sucesso(string $mensagem): Mensagem
     {
-        $this->css = 'alert alert-success';
+        $this->css = 'alert alert-success alert-dismissible fade show';
         $this->texto = $this->filtrar($mensagem);
         return $this;
     }
@@ -55,7 +57,7 @@ class Mensagem
 
     public function alerta(string $mensagem): Mensagem
     {
-        $this->css = 'alert alert-warning';
+        $this->css = 'alert alert-warning alert-dismissible fade show';
         $this->texto = $this->filtrar($mensagem);
         return $this;
     }
@@ -80,7 +82,9 @@ class Mensagem
 
     public function renderizar(): string
     {
-        return "<div class='{$this->css}'>{$this->texto}</div>";
+        return "<div class='{$this->css}'>{$this->texto}
+                    <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>
+                </div>";
     } 
 
     /**
@@ -92,6 +96,11 @@ class Mensagem
     private function filtrar(string $mensagem): string
     {
         return filter_var($mensagem, FILTER_SANITIZE_SPECIAL_CHARS);
+    } 
+    
+    public function flash():void
+    {
+        (new Sessao())->criar('flash', $this);
     } 
 
     // public $texto;

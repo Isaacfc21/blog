@@ -47,6 +47,11 @@ class Template
                 new \Twig\TwigFunction('resumirTexto', function(string $texto, int $limite = 100){
                     return Helpers_c::resumirTexto($texto, $limite);
                 })   
+            ),
+            $this->twig->addFunction(
+                new \Twig\TwigFunction('flash', function(){
+                    return Helpers_c::flash();
+                })   
             )
         );
     }

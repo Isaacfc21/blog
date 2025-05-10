@@ -29,7 +29,8 @@ class AdminCategorias extends AdminControlador
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if(isset($dados)){
             (new CategoriaModelo())->armazenar($dados);
-            Helpers_c::redirecionar('Aula80-91.php/admin/categorias/listar');
+            $this->mensagem->sucesso('Categoria cadastrada com sucesso!')->flash();
+            Helpers_c::redirecionar('Aula92-103.php/admin/categorias/listar');
         }
         
         echo $this->template->renderizar('posts/formulario_c.html', []);
@@ -41,20 +42,21 @@ class AdminCategorias extends AdminControlador
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if(isset($dados)){
             (new CategoriaModelo())->atualizar($dados, $id);
-            Helpers_c::redirecionar('Aula80-91.php/admin/categorias/listar');
+            $this->mensagem->alerta('Categoria editada com sucesso!')->flash();
+            Helpers_c::redirecionar('Aula92-103.php/admin/categorias/listar');
         }
 
         if(!$categoria){
-            Helpers_c::redirecionar('Aula80-91.php/404');
+            Helpers_c::redirecionar('Aula92-103.php/404');
         }
         echo $this->template->renderizar('posts/formulario_c.html', [
-            'categoria' => $categoria,
+             'categoria' => $categoria,
         ]);
     }
     public function deletar(int $id):void
     {
         (new CategoriaModelo())->deletar($id);
-            Helpers_c::redirecionar('Aula80-91.php/admin/categorias/listar');
+            Helpers_c::redirecionar('Aula92-103.php/admin/categorias/listar');
     }
 }
 

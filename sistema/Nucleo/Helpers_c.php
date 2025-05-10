@@ -3,6 +3,7 @@
 namespace sistema\Nucleo;
 
 use Exception;
+use sistema\Nucleo\Sessao;
 
 /**
  * Class Helpers_c
@@ -12,7 +13,16 @@ use Exception;
 
 class Helpers_c
 {
-    #echo("Arquivo de Funções");
+
+public static function flash(): ?string
+{
+    $sessao = new Sessao(); 
+
+    if($flash = $sessao->flash()){
+        echo $flash;
+    }
+    return null;
+}
 
 
 public static function redirecionar(?string $url = null):void

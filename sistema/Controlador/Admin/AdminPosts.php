@@ -31,7 +31,8 @@ class AdminPosts extends AdminControlador
         
         if(isset($dados)){
             (new PostModelo())->armazenar($dados);
-            Helpers_c::redirecionar('Aula80-91.php/admin/posts/listar');
+            $this->mensagem->sucesso('Post cadastrado com sucesso!')->flash();
+            Helpers_c::redirecionar('Aula92-103.php/admin/posts/listar');
         }
 
         echo $this->template->renderizar('posts/formulario_p.html', [
@@ -46,11 +47,12 @@ class AdminPosts extends AdminControlador
 
         if(isset($dados)){
             (new PostModelo())->atualizar($dados, $id);
-            Helpers_c::redirecionar('Aula80-91.php/admin/posts/listar');
+            $this->mensagem->alerta('Post editado com sucesso!')->flash();
+            Helpers_c::redirecionar('Aula92-103.php/admin/posts/listar');
         }
 
         if(!$post){
-            Helpers_c::redirecionar('Aula80-91.php/404');
+            Helpers_c::redirecionar('Aula92-103.php/404');
         }
         echo $this->template->renderizar('posts/formulario_p.html', [
             'post' => $post,
@@ -60,7 +62,7 @@ class AdminPosts extends AdminControlador
     public function deletar(int $id):void
     {
         (new PostModelo())->deletar($id);
-            Helpers_c::redirecionar('Aula80-91.php/admin/posts/listar');
+            Helpers_c::redirecionar('Aula92-103.php/admin/posts/listar');
     }
 }
 
