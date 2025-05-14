@@ -29,15 +29,15 @@ class PostModelo extends Modelo
         
     //     return $resultado;
     // }
-    public function buscaporID(int $id):bool|object
-    {
-        $query = "SELECT * FROM posts WHERE id = {$id}";
-        $stmt = Conexao::getInstancia()->query($query);
+    // public function buscaporID(int $id):bool|object
+    // {
+    //     $query = "SELECT * FROM posts WHERE id = {$id}";
+    //     $stmt = Conexao::getInstancia()->query($query);
         
-        $resultado = $stmt->fetch();
+    //     $resultado = $stmt->fetch();
         
-        return $resultado;
-    }
+    //     return $resultado;
+    // }
     public function pesquisa(string $busca):array
     {
         // $query = "SELECT * FROM posts WHERE status = 1 ORDER BY id DESC";

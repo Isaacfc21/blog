@@ -30,10 +30,10 @@ try{
 
     SimpleRouter::start();
 }catch (Pecee\SimpleRouter\Exceptions\NotFoundHttpException $ex){
-    if(Helpers_c::localhost()){
+    if(!Helpers_c::localhost()){
         echo $ex;
     }else{
-        Helpers_c::redirecionar('/Aula80-91.php/404');
+        Helpers_c::redirecionar('/Aula92-103.php/404');
     }
 }
 // SimpleRouter::setDefaultNamespace('sistema\Controlador');

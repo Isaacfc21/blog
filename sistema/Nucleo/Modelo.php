@@ -4,6 +4,7 @@ namespace sistema\Nucleo;
 use PDOException;
 use sistema\Nucleo\Conexao;
 use sistema\Nucleo\Mensagem;
+
 /**
  * Class Modelo
  * 
@@ -58,6 +59,11 @@ class Modelo
         return $this->mensagem;
     }
 
+    public function dados()
+    {
+        return $this->dados;
+    }
+
     public function __set($nome, $valor)
     {
         if(empty($this->dados)){
@@ -67,8 +73,17 @@ class Modelo
         $this->dados->$nome = $valor;
         return $this;
     }
-    
 
+    public function __isset($nome)
+    {
+        return $this->dados->$nome;
+    }
+
+    public function __get($nome)
+    {
+        return $this->dados->$nome ?? null;
+    }
+    
     public function busca(?string $termos = null, ?string $parametros = null, string $colunas = '*')
     {
         if($termos) {
@@ -95,7 +110,7 @@ class Modelo
                 return $stmt->fetchAll(); 
             } 
             
-            return $stmt->fetchObject();
+            return $stmt->fetchObject(static::class);
 
         } catch (\PDOException $ex) {
             echo $this->erro = $ex;
@@ -159,15 +174,35 @@ class Modelo
         return $dados;
     }
 
+    public function buscaPorId(int $id)
+    {
+        $busca = $this->busca("id = {$id}");
+        return $busca->resultado();
+    }
+
     public function salvar()
     {
+        //CADASTRAR
         if(empty($this->id)){
-            $this->cadastrar($this->armazenar());
+            $id = $this->cadastrar($this->armazenar());
             if($this->erro){
                 $this->mensagem->erro('Erro de sistema ao tentar cadastrar os dados');
                 return false;
             }
         }
+
+        //ATUALIZAR
+        if(!empty($this->id)){
+            $id = $this->id;
+            $this->atualizar($this->armazenar(), "id = {$id}");
+            if($this->erro){
+                $this->mensagem->erro('Erro de sistema ao tentar atualizar os dados');
+                return false;
+            } 
+        }
+
+        $this->dados = $this->buscaPorId($id)->dados();
+
         return true;
     }
     

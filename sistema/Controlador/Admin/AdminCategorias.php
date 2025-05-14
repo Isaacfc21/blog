@@ -28,9 +28,16 @@ class AdminCategorias extends AdminControlador
     {
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if(isset($dados)){
-            (new CategoriaModelo())->armazenar($dados);
-            $this->mensagem->sucesso('Categoria cadastrada com sucesso!')->flash();
-            Helpers_c::redirecionar('Aula92-103.php/admin/categorias/listar');
+            $categoria  = new CategoriaModelo();
+
+            $categoria->titulo = $dados['titulo'];
+            $categoria->texto = $dados['texto'];
+            $categoria->status = $dados['status'];
+
+            if($categoria->salvar()){
+                $this->mensagem->sucesso('Categoria cadastrada com sucesso!')->flash();
+                Helpers_c::redirecionar('Aula92-103.php/admin/categorias/listar');
+            }
         }
         
         echo $this->template->renderizar('posts/formulario_c.html', []);
@@ -41,7 +48,7 @@ class AdminCategorias extends AdminControlador
         
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         if(isset($dados)){
-            (new CategoriaModelo())->atualizar($dados, $id);
+            
             $this->mensagem->alerta('Categoria editada com sucesso!')->flash();
             Helpers_c::redirecionar('Aula92-103.php/admin/categorias/listar');
         }

@@ -26,7 +26,7 @@ class SiteControlador extends Controlador
         $posts = (new PostModelo())->busca(null,'rand()');
 
         echo $this->template->renderizar('index.html', [
-            'posts' => $posts,
+            'posts' => $posts->resultado(true),
             'categorias' => $this->categorias(),
         ]);
     }
@@ -69,7 +69,7 @@ class SiteControlador extends Controlador
     }
     public function categorias()
     {
-        return (new CategoriaModelo())->busca();
+        return (new CategoriaModelo())->busca()->resultado(true);
     }
     public function buscar(): void
     {
