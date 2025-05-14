@@ -30,13 +30,21 @@ class AdminPosts extends AdminControlador
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         
         if(isset($dados)){
-            (new PostModelo())->armazenar($dados);
-            $this->mensagem->sucesso('Post cadastrado com sucesso!')->flash();
-            Helpers_c::redirecionar('Aula92-103.php/admin/posts/listar');
+            $post  = new PostModelo();
+
+            $post->titulo = $dados['titulo'];
+            $post->categoria_id = $dados['categoria_id'];
+            $post->texto = $dados['texto'];
+            $post->status = $dados['status'];
+
+            if($post->salvar()){
+                $this->mensagem->sucesso('Post cadastrado com sucesso!')->flash();
+                Helpers_c::redirecionar('Aula92-103.php/admin/posts/listar');
+            }
         }
 
         echo $this->template->renderizar('posts/formulario_p.html', [
-            'categorias' => (new CategoriaModelo())->busca(),
+            'categorias' => (new CategoriaModelo())->busca()->resultado(true),
         ]);
     }
     public function editar( int $id):void
@@ -56,7 +64,7 @@ class AdminPosts extends AdminControlador
         }
         echo $this->template->renderizar('posts/formulario_p.html', [
             'post' => $post,
-            'categorias' => (new CategoriaModelo())->busca(),
+            'categorias' => (new CategoriaModelo())->busca()->resultado(true),
         ]);
     }
     public function deletar(int $id):void

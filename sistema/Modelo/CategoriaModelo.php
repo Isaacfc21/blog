@@ -50,28 +50,28 @@ class CategoriaModelo extends Modelo
         
         return $resultado;
     }
-    public function armazenar(array $dados):void
-    {
-        // $query = "SELECT * FROM posts WHERE status = 1 ORDER BY id DESC";
-        $query = "INSERT INTO `categorias` (`titulo`, `texto`, `status`) VALUES (?, ?, ?);";
-        $stmt = Conexao::getInstancia()->prepare($query);
-        $stmt->execute([
-            $dados['titulo'],
-            $dados['texto'],
-            $dados['status']
-        ]);
-    }
-    public function atualizar(array $dados, int $id):void
-    {
-        $query = "UPDATE categorias SET titulo = ?, texto = ?, status = ? WHERE id = ?";
-        $stmt = Conexao::getInstancia()->prepare($query);
-        $stmt->execute([
-            $dados['titulo'],
-            $dados['texto'],
-            $dados['status'],
-            $id
-        ]);
-    }
+    // public function armazenar(array $dados):void
+    // {
+    //     // $query = "SELECT * FROM posts WHERE status = 1 ORDER BY id DESC";
+    //     $query = "INSERT INTO `categorias` (`titulo`, `texto`, `status`) VALUES (?, ?, ?);";
+    //     $stmt = Conexao::getInstancia()->prepare($query);
+    //     $stmt->execute([
+    //         $dados['titulo'],
+    //         $dados['texto'],
+    //         $dados['status']
+    //     ]);
+    // }
+    // public function atualizar(array $dados, int $id):void
+    // {
+    //     $query = "UPDATE categorias SET titulo = ?, texto = ?, status = ? WHERE id = ?";
+    //     $stmt = Conexao::getInstancia()->prepare($query);
+    //     $stmt->execute([
+    //         $dados['titulo'],
+    //         $dados['texto'],
+    //         $dados['status'],
+    //         $id
+    //     ]);
+    // }
     public function deletar(int $id):void
     {
         $query = "DELETE FROM `categorias` WHERE id = {$id}";
