@@ -42,28 +42,70 @@ class AdminCategorias extends AdminControlador
         
         echo $this->template->renderizar('posts/formulario_c.html', []);
     }
-    public function editar(int $id):void
+    public function editar(int $id): void
     {
-        $categoria = (new CategoriaModelo())->buscaporId($id);
-        
-        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        if(isset($dados)){
-            
-            $this->mensagem->alerta('Categoria editada com sucesso!')->flash();
-            Helpers_c::redirecionar('Aula92-103.php/admin/categorias/listar');
+        $categoria = (new CategoriaModelo())->buscaPorId($id);
+
+        if (!$categoria) {
+            Helpers_c::redirecionar('Aula92-103.php/404');
+            exit;
         }
 
-        if(!$categoria){
-            Helpers_c::redirecionar('Aula92-103.php/404');
+        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+
+        if (!empty($dados)) {
+            $categoria->titulo = $dados['titulo'];
+            $categoria->texto = $dados['texto'];
+            $categoria->status = $dados['status'];
+
+            if ($categoria->salvar()) {
+                $this->mensagem->sucesso('Categoria atualizada com sucesso!')->flash();
+                Helpers_c::redirecionar('Aula92-103.php/admin/categorias/listar');
+                exit;
+            } else {
+                $this->mensagem->alerta('Falha ao atualizar a categoria!')->flash();
+                Helpers_c::redirecionar('Aula92-103.php/admin/categorias/listar');
+                exit;
+            }
         }
+
         echo $this->template->renderizar('posts/formulario_c.html', [
-             'categoria' => $categoria,
+            'categoria' => $categoria,
+            'categorias' => (new CategoriaModelo())->busca()->resultado(true),
         ]);
     }
+
     public function deletar(int $id):void
     {
-        (new CategoriaModelo())->deletar($id);
-            Helpers_c::redirecionar('Aula92-103.php/admin/categorias/listar');
+
+        // $id =  filter_var($id, FILTER_VALIDATE_INT); 
+
+        // if($id){
+
+        // } OU
+
+        if(is_int($id)){
+            $categoria = (new CategoriaModelo())->buscaPorId($id);
+            if(!$categoria){
+                $this->mensagem->alerta('Categoria não encontrada!')->flash();
+                Helpers_c::redirecionar('Aula92-103.php/admin/categorias/listar');
+            } else {
+                if($categoria->apagar("id = {$id}")){
+                    $this->mensagem->sucesso('Categoria deletada com sucesso!')->flash();
+                    Helpers_c::redirecionar('Aula92-103.php/admin/categorias/listar');
+                } else {
+                    $this->mensagem->erro($categoria->erro())->flash();
+                    Helpers_c::redirecionar('Aula92-103.php/admin/categorias/listar');
+                }
+            }
+        }
+
+        if($id){
+            $categoria = (new CategoriaModelo())->buscaPorId($id);
+            if(!$categoria){
+                Helpers_c::redirecionar('Aula92-103.php/404');
+            }
+        }
     }
 }
 

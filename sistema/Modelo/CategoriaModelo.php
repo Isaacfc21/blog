@@ -29,16 +29,16 @@ class CategoriaModelo extends Modelo
         
     //     return $resultado;
     // }
-    public function buscaporID(int $id):bool|object
-    {
-        $query = "SELECT * FROM categorias WHERE id = {$id}";
-        $stmt = Conexao::getInstancia()->query($query);
+    // public function buscaporID(int $id):bool|object
+    // {
+    //     $query = "SELECT * FROM categorias WHERE id = {$id}";
+    //     $stmt = Conexao::getInstancia()->query($query);
         
-        $resultado = $stmt->fetch();
+    //     $resultado = $stmt->fetch();
         
         
-        return $resultado;
-    }
+    //     return $resultado;
+    // }
     public function posts(int $id):array
     {
         // $query = "SELECT * FROM posts WHERE status = 1 ORDER BY id DESC";
@@ -72,20 +72,20 @@ class CategoriaModelo extends Modelo
     //         $id
     //     ]);
     // }
-    public function deletar(int $id):void
-    {
-        $query = "DELETE FROM `categorias` WHERE id = {$id}";
-        $stmt = Conexao::getInstancia()->prepare($query);
-        $stmt->execute();
-    }
-    public function total(?string $termo = null):int
-    {
-        $termo =  ($termo ? "WHERE {$termo}" : '');
-        $query = "SELECT * FROM categorias {$termo}";
-        $stmt = Conexao::getInstancia()->prepare($query);
-        $stmt->execute();
-        return $stmt->rowCount();
-    }
+    // public function deletar(int $id):void
+    // {
+    //     $query = "DELETE FROM `categorias` WHERE id = {$id}";
+    //     $stmt = Conexao::getInstancia()->prepare($query);
+    //     $stmt->execute();
+    // }
+    // public function total(?string $termo = null):int
+    // {
+    //     $termo =  ($termo ? "WHERE {$termo}" : '');
+    //     $query = "SELECT * FROM categorias {$termo}";
+    //     $stmt = Conexao::getInstancia()->prepare($query);
+    //     $stmt->execute();
+    //     return $stmt->rowCount();
+    // }
 }
 
 

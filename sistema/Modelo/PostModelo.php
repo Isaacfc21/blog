@@ -38,17 +38,17 @@ class PostModelo extends Modelo
         
     //     return $resultado;
     // }
-    public function pesquisa(string $busca):array
-    {
-        // $query = "SELECT * FROM posts WHERE status = 1 ORDER BY id DESC";
-        $query = "SELECT * FROM posts WHERE status = 1  AND titulo LIKE '%{$busca}%'";
-        $stmt = Conexao::getInstancia()->query($query);
+    // public function pesquisa(string $busca):array
+    // {
+    //     // $query = "SELECT * FROM posts WHERE status = 1 ORDER BY id DESC";
+    //     $query = "SELECT * FROM posts WHERE status = 1  AND titulo LIKE '%{$busca}%'";
+    //     $stmt = Conexao::getInstancia()->query($query);
         
-        $resultado = $stmt->fetchAll();
+    //     $resultado = $stmt->fetchAll();
         
         
-        return $resultado;
-    }
+    //     return $resultado;
+    // }
     // public function armazenar(array $dados):void
     // {
     //     $query = "INSERT INTO `posts` (`categoria_id`, `titulo`, `texto`, `status`) VALUES (:categoria_id, :titulo, :texto, :status);";
@@ -62,20 +62,20 @@ class PostModelo extends Modelo
     //     $stmt = Conexao::getInstancia()->prepare($query);
     //     $stmt->execute($dados);
     // }
-    public function deletar(int $id):void
-    {
-        $query = "DELETE FROM `posts` WHERE id = {$id}";
-        $stmt = Conexao::getInstancia()->prepare($query);
-        $stmt->execute();
-    }
-    public function total(?string $termo = null):int
-    {
-        $termo =  ($termo ? "WHERE {$termo}" : '');
-        $query = "SELECT * FROM posts {$termo}";
-        $stmt = Conexao::getInstancia()->prepare($query);
-        $stmt->execute();
-        return $stmt->rowCount();
-    }
+    // public function deletar(int $id):void
+    // {
+    //     $query = "DELETE FROM `posts` WHERE id = {$id}";
+    //     $stmt = Conexao::getInstancia()->prepare($query);
+    //     $stmt->execute();
+    // }
+    // public function total(?string $termo = null):int
+    // {
+    //     $termo =  ($termo ? "WHERE {$termo}" : '');
+    //     $query = "SELECT * FROM posts {$termo}";
+    //     $stmt = Conexao::getInstancia()->prepare($query);
+    //     $stmt->execute();
+    //     return $stmt->rowCount();
+    // }
 }
 
 // $query = "SELECT * FROM posts WHERE id = 3 AND status = 1 OR status = 0";

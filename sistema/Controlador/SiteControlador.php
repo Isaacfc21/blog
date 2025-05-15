@@ -23,7 +23,7 @@ class SiteControlador extends Controlador
 
     public function index():void
     {
-        $posts = (new PostModelo())->busca(null,'rand()');
+        $posts = (new PostModelo())->busca("status = 1");
 
         echo $this->template->renderizar('index.html', [
             'posts' => $posts->resultado(true),
@@ -52,7 +52,7 @@ class SiteControlador extends Controlador
         }
         echo $this->template->renderizar('post.html', [
             'post' => $post,
-            'categorias' => $this->categorias(),
+            'categorias' => $this->categorias()
         ]);
     }
     public function categoria(int $id):void
@@ -76,9 +76,9 @@ class SiteControlador extends Controlador
         $busca = filter_input(INPUT_POST, 'busca', FILTER_DEFAULT);
 
         if ($busca) {
-            $posts = (new PostModelo())->pesquisa($busca);
+            $posts = (new PostModelo())->busca("status = 1 AND titulo LIKE '%" . addslashes($busca) . "%'")->resultado(true);
 
-            if ($posts && count($posts) > 0) {
+            if ($posts) {
                 foreach ($posts as $post) {
                     echo "<li class='list-group-item fw-bold'>
                             <a href='" . Helpers_c::url('/Aula68-79.php/post/') . $post->id . "' class='link_post'>
@@ -87,12 +87,12 @@ class SiteControlador extends Controlador
                         </li>";
                 }
             } else {
-                // Retorna uma string clara para o JS detectar
-                echo "<li class='nenhum-resultado'></li>";
+                echo "<li class='nenhum-resultado'>Nenhum resultado encontrado</li>";
             }
+        } else {
+            echo "<li class='nenhum-resultado'>Busca vazia</li>";
         }
     }
-
 }
 
 // public function categoria(int $id):void

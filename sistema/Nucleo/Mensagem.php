@@ -44,7 +44,7 @@ class Mensagem
     
     public function erro(string $mensagem): Mensagem
     {
-        $this->css = 'alert alert-danger';
+        $this->css = 'alert alert-danger alert-dismissible fade show';
         $this->texto = $this->filtrar($mensagem);
         return $this;
     }

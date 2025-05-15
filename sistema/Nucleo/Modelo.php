@@ -1,6 +1,7 @@
 <?php
 
 namespace sistema\Nucleo;
+
 use PDOException;
 use sistema\Nucleo\Conexao;
 use sistema\Nucleo\Mensagem;
@@ -28,7 +29,7 @@ class Modelo
     public function __construct(string $tabela)
     {
         $this->tabela = $tabela;
-        $this->mensagem = new Mensagem();        
+        $this->mensagem = new Mensagem();
     }
 
     public function ordem(string $ordem)
@@ -66,7 +67,7 @@ class Modelo
 
     public function __set($nome, $valor)
     {
-        if(empty($this->dados)){
+        if (empty($this->dados)) {
             $this->dados = new \stdClass();
         }
 
@@ -83,35 +84,34 @@ class Modelo
     {
         return $this->dados->$nome ?? null;
     }
-    
+
     public function busca(?string $termos = null, ?string $parametros = null, string $colunas = '*')
     {
-        if($termos) {
+        if ($termos) {
             $this->query = "SELECT {$colunas} FROM {$this->tabela} WHERE {$termos}";
             parse_str($parametros, $this->parametros);
             return $this;
         }
-        
-        $this->query = "SELECT {$colunas} FROM {$this->tabela}";   
+
+        $this->query = "SELECT {$colunas} FROM {$this->tabela}";
         return $this;
     }
 
     public function resultado(bool $todos = false)
     {
         try {
-            $stmt = Conexao::getInstancia()->prepare($this->query.$this->ordem.$this->limite.$this->offset);
+            $stmt = Conexao::getInstancia()->prepare($this->query . $this->ordem . $this->limite . $this->offset);
             $stmt->execute($this->parametros);
 
-            if(!$stmt->rowCount()){
+            if (!$stmt->rowCount()) {
                 return null;
             }
 
-            if($todos) {
-                return $stmt->fetchAll(); 
-            } 
-            
-            return $stmt->fetchObject(static::class);
+            if ($todos) {
+                return $stmt->fetchAll();
+            }
 
+            return $stmt->fetchObject(static::class);
         } catch (\PDOException $ex) {
             echo $this->erro = $ex;
             return null;
@@ -120,14 +120,13 @@ class Modelo
 
     protected function cadastrar(array $dados)
     {
-        try{
+        try {
             $colunas = implode(', ', array_keys($dados));
-            $valores = ':'.implode(', :', array_keys($dados));
+            $valores = ':' . implode(', :', array_keys($dados));
             $query  = "INSERT INTO {$this->tabela} ({$colunas}) VALUES ({$valores});";
             $stmt = Conexao::getInstancia()->prepare($query);
             $stmt->execute($this->filtro($dados));
             return Conexao::getInstancia()->lastInsertId();
-
         } catch (\PDOException $ex) {
             echo $this->erro = $ex;
             return null;
@@ -139,7 +138,7 @@ class Modelo
         try {
             $set = [];
 
-            foreach($dados as $chave => $valor){
+            foreach ($dados as $chave => $valor) {
                 $set[] = "{$chave} = :{$chave}";
             }
 
@@ -150,18 +149,17 @@ class Modelo
             $stmt->execute($this->filtro($dados));
 
             return ($stmt->rowCount() ?? 1);
-
         } catch (\PDOException $ex) {
             echo $this->erro = $ex;
             return null;
-        }        
+        }
     }
 
-    private function filtro(array $dados):array
+    private function filtro(array $dados): array
     {
         $filtro = [];
 
-        foreach($dados as $chave => $valor) {
+        foreach ($dados as $chave => $valor) {
             $filtro[$chave] = (is_null($valor) ? null : filter_var($valor, FILTER_DEFAULT));
         }
 
@@ -180,32 +178,57 @@ class Modelo
         return $busca->resultado();
     }
 
+    public function apagar(string $termos)
+    {
+        try {
+            $query  = "DELETE FROM {$this->tabela} WHERE {$termos};";
+            $stmt = Conexao::getInstancia()->prepare($query);
+            $stmt->execute();
+
+            return true;
+        } catch (\PDOException $ex) {
+            $this->erro = $ex->getMessage();
+            return null;
+        }
+    }
+    public function total(string $where = ''): int
+    {
+        $sql = 'SELECT COUNT(*) FROM posts';
+        if (!empty($where)) {
+            $sql .= ' WHERE ' . $where;
+        }
+
+        $stmt = Conexao::getInstancia()->prepare($sql);
+        $stmt->execute();
+        return (int) $stmt->fetchColumn();
+    }
+
+
     public function salvar()
     {
         //CADASTRAR
-        if(empty($this->id)){
+        if (empty($this->id)) {
             $id = $this->cadastrar($this->armazenar());
-            if($this->erro){
+            if ($this->erro) {
                 $this->mensagem->erro('Erro de sistema ao tentar cadastrar os dados');
                 return false;
             }
         }
 
         //ATUALIZAR
-        if(!empty($this->id)){
+        if (!empty($this->id)) {
             $id = $this->id;
             $this->atualizar($this->armazenar(), "id = {$id}");
-            if($this->erro){
+            if ($this->erro) {
                 $this->mensagem->erro('Erro de sistema ao tentar atualizar os dados');
                 return false;
-            } 
+            }
         }
 
         $this->dados = $this->buscaPorId($id)->dados();
 
         return true;
     }
-    
 }
 
 ?>

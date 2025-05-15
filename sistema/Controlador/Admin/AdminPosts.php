@@ -79,8 +79,35 @@ class AdminPosts extends AdminControlador
     }
     public function deletar(int $id):void
     {
-        (new PostModelo())->deletar($id);
-            Helpers_c::redirecionar('Aula92-103.php/admin/posts/listar');
+
+        // $id =  filter_var($id, FILTER_VALIDATE_INT); 
+
+        // if($id){
+
+        // } OU
+
+        if(is_int($id)){
+            $post = (new PostModelo())->buscaPorId($id);
+            if(!$post){
+                $this->mensagem->alerta('Post não encontrado!')->flash();
+                Helpers_c::redirecionar('Aula92-103.php/admin/posts/listar');
+            } else {
+                if($post->apagar("id = {$id}")){
+                    $this->mensagem->sucesso('Post deletado com sucesso!')->flash();
+                    Helpers_c::redirecionar('Aula92-103.php/admin/posts/listar');
+                } else {
+                    $this->mensagem->erro($post->erro())->flash();
+                    Helpers_c::redirecionar('Aula92-103.php/admin/posts/listar');
+                }
+            }
+        }
+
+        if($id){
+            $post = (new PostModelo())->buscaPorId($id);
+            if(!$post){
+                Helpers_c::redirecionar('Aula92-103.php/404');
+            }
+        }
     }
 }
 
