@@ -92,7 +92,7 @@ class AdminPosts extends AdminControlador
                 $this->mensagem->alerta('Post não encontrado!')->flash();
                 Helpers_c::redirecionar('Aula92-103.php/admin/posts/listar');
             } else {
-                if($post->apagar("id = {$id}")){
+                if($post->deletar()){
                     $this->mensagem->sucesso('Post deletado com sucesso!')->flash();
                     Helpers_c::redirecionar('Aula92-103.php/admin/posts/listar');
                 } else {

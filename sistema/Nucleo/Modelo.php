@@ -14,7 +14,7 @@ use sistema\Nucleo\Mensagem;
  * @version 1.0.0
  */
 
-class Modelo
+abstract class Modelo
 {
     protected $dados;
     protected $query;
@@ -191,6 +191,18 @@ class Modelo
             return null;
         }
     }
+
+    public function deletar()
+    {
+        if(empty($this->id)){
+            // $this->mensagem->erro('Erro de sistema ao tentar deletar os dados');
+            return false;
+        }
+
+        $deletar = $this->apagar("id = {$this->id}");
+        return $deletar;
+    }
+
     public function total(string $where = ''): int
     {
         $sql = 'SELECT COUNT(*) FROM posts';

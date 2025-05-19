@@ -74,8 +74,36 @@
 <?php
     //Aula 097-099
 
+    // require 'vendor/autoload.php';
+    // require 'rotas.php';
+
+    //Conteúdo
+?>
+<?php
+    //Aula 100
+
     require 'vendor/autoload.php';
     require 'rotas.php';
+
+    // abstract class Animal
+    // {
+    //     public function __construct()
+    //     {
+    //         echo __CLASS__;
+    //     }
+    //     abstract public function nome();
+    // }
+    // class Gato  extends Animal
+    // {
+    //     public function __construct()
+    //     {
+    //         echo 'Gato';
+    //     }
+    //     public function nome(){
+
+    //     }
+    // }
+    // var_dump(new Gato());
 
     //Conteúdo
 ?>

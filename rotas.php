@@ -13,6 +13,10 @@ try{
     SimpleRouter::post(URL_SITE.'buscar', 'SiteControlador@buscar');
 
     SimpleRouter::group(['namespace' => 'Admin'], function () {
+
+        SimpleRouter::match(['get', 'post'], URL_ADMIN.'login', 'AdminLogin@login');
+
+        //DASHBOARD
         SimpleRouter::get(URL_ADMIN.'dashboard', 'AdminDashboard@dashboard');
 
         //ADMIN POSTS
@@ -30,7 +34,7 @@ try{
 
     SimpleRouter::start();
 }catch (Pecee\SimpleRouter\Exceptions\NotFoundHttpException $ex){
-    if(!Helpers_c::localhost()){
+    if(Helpers_c::localhost()){
         echo $ex;
     }else{
         Helpers_c::redirecionar('/Aula92-103.php/404');
