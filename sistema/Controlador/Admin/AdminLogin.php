@@ -19,22 +19,43 @@ class AdminLogin extends Controlador
 
     public function login():void
     {
-        // $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        // if(isset($dados)){
-        //     $usuario = new UsuarioModelo();
-        //     $usuario->email = $dados['email'];
-        //     $usuario->senha = $dados['senha'];
-
-        //     if($usuario->logar()){
-        //         $this->mensagem->sucesso('Login realizado com sucesso!')->flash();
-        //         Helpers_c::redirecionar('Aula92-103.php/admin/dashboard');
-        //     }else{
-        //         $this->mensagem->erro('Erro ao realizar login!')->flash();
-        //     }
-        // }
+        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        if(isset($dados)){
+            if(in_array('', $dados)){
+                $this->mensagem->erro('Preencha todos os campos!')->flash();
+            }elseif(strlen($dados['senha']) < 6){
+                $this->mensagem->erro('A senha deve ter no mínimo 6 caracteres!')->flash();
+            }else{
+              $this->mensagem->sucesso('Login Efetuado com sucesso!')->flash();
+            }
+        }
 
         echo $this->template->renderizar('login.html', []);
     }
+    
+    // private function ChecarDados(array $dados):bool
+    // {
+    //     if(empty($dados['email'])){
+    //         $this->mensagem->erro('Campo de email obrigatório!')->flash();
+    //         return false;
+    //     }
+
+    //     if(empty($dados['senha'])){
+    //         $this->mensagem->erro('Campo de senha obrigatório!')->flash();
+    //         return false;
+    //     }
+
+    //     if(!filter_var($dados['email'], FILTER_VALIDATE_EMAIL)){
+    //         $this->mensagem->erro('Email inválido!')->flash();
+    //         return false;
+    //     }
+
+    //     if(strlen($dados['senha']) < 6){
+    //         $this->mensagem->erro('A senha deve ter no mínimo 6 caracteres!')->flash();
+    //         return false;
+    //     }
+    //   return true;
+    // }
 }
 
 ?>

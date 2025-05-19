@@ -3,27 +3,28 @@
 {% block corpo %}
 <div class="d-flex align-items-center justify-content-center vh-100">
   <main class="form-signin w-100" style="max-width: 330px;">
-    <form>
+    <form action="{{ url('Aula92-103.php/admin/login') }}" method="post">
       <img class="mb-4" src="{{ url('templates/dashboard/assets/img/bootstrap-logo.svg') }}" alt="Logo" width="72" height="57">
-      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+      {{ flash() }}
 
       <div class="form-floating">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <input name="email" type="email" class="form-control" id="email" placeholder="name@example.com">
         <label for="floatingInput">Email address</label>
       </div>
 
-      <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <div class="form-floating my-3">
+        <input name="senha" type="password" class="form-control" id="senha" placeholder="Password">
         <label for="floatingPassword">Password</label>
       </div>
 
-      <div class="form-check text-start my-3">
+      <!-- <div class="form-check text-start my-3">
         <input class="form-check-input" type="checkbox" value="remember-me" id="checkDefault">
         <label class="form-check-label" for="checkDefault">Remember me</label>
-      </div>
+      </div> -->
 
-      <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
-      <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2025</p>
+      <button id="btn_mudarcor" class="btn btn-dark w-100 py-2" type="submit">Entrar</button>
+      <p class="mt-5 mb-3 text-body-secondary">&copy; Unset - 2025</p>
     </form>
   </main>
 </div>
