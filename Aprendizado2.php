@@ -1,34 +1,4 @@
 <?php
-    //Aula 021 
-
-    /*
-        include_once "helpers.php";
-        $texto = '<h1>texto</h1> <p>para</p> resumir';
-        */
-
-    # echo resumirTexto($texto, 50);
-
-    //Conteúdo
-?>
-<?php
-    //Aula 025  
-
-    # include_once "helpers.php";
-    # echo 'R$' . ' ' . (formatarNumero(50));
-    // var_dump($valor);    
-    /*
-        if($valor){
-            echo $valor;
-        }else{
-            echo 0;
-        }
-        */
-
-    // echo($valor ? $valor : 0);
-
-    //Conteúdo
-?>
-<?php
     //Aula 026 
 
     // include_once "sistema/configuracao.php";
@@ -117,10 +87,10 @@
 <?php
     //Aula 032
 
-    require_once "sistema/configuracao.php";
-    include_once "helpers.php";
+    // require_once "sistema/configuracao.php";
+    // include_once "helpers.php";
  
-    echo 'Boa tarde hoje é'.' '.dataAtual();
+    // echo 'Boa tarde hoje é'.' '.dataAtual();
 
     // $meses = array();
     // $meses = ['Janeiro', 'Fevereiro', 'Março'];
@@ -143,6 +113,51 @@
     // echo $_SERVER['HTTP_HOST']; //Não se usa echo, e sim var_dmp, a não ser por um array.
     // echo '<hr>'; 
     // var_dump($_SERVER);
+
+    //Conteúdo
+?>
+<?php
+    //Aula 045-047
+
+    // require_once 'sistema/configuracao.php';
+    // include_once 'sistema/Nucleo/class_helpers.php';
+    // include 'sistema/Nucleo/Mensagem.php';
+    // include 'sistema/Nucleo/controlador.php';
+
+    // use sistema\Nucleo\Controlador;
+ 
+    // $controlador = new Controlador('admin');
+    // echo '<hr>';
+    // var_dump($controlador)
+
+    //Conteúdo
+?>
+<?php
+    //Aula 048
+
+    // require_once 'sistema/configuracao.php';
+    // include_once 'sistema/Nucleo/class_helpers.php';
+    // include 'sistema/Nucleo/Mensagem.php';
+    // include 'sistema/Nucleo/controlador.php';
+    // require 'vendor/autoload.php';
+
+    // echo sistema\Nucleo\Helpers_c::saudacao_switch();
+    // echo '<hr>';
+    // echo SITE_NOME;
+
+
+    //Conteúdo
+?>
+<?php
+    //Aula 049
+
+    // require_once 'sistema/configuracao.php';
+    // include_once 'sistema/Nucleo/class_helpers.php';
+    // include 'sistema/Nucleo/Mensagem.php';
+    // include 'sistema/Nucleo/controlador.php';
+    // require 'vendor/autoload.php';
+
+    //Aprendi a baixar, usar e remover uma biblioteca do Packagist.org
 
     //Conteúdo
 ?>
