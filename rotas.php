@@ -37,7 +37,7 @@ try{
     if(Helpers_c::localhost()){
         echo $ex;
     }else{
-        Helpers_c::redirecionar('/Aula92-103.php/404');
+        Helpers_c::redirecionar('/blog/404');
     }
 }
 // SimpleRouter::setDefaultNamespace('sistema\Controlador');

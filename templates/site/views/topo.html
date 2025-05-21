@@ -19,7 +19,7 @@
             </a>
     
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-              <li><a href="{{url('/Aula92-103.php')}}" class="nav-link px-2 text-secondary">Home</a></li>
+              <li><a href="{{url('/blog')}}" class="nav-link px-2 text-secondary">Home</a></li>
               <div class="dropdown">
                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Categorias
@@ -27,15 +27,15 @@
               
                 <ul class="dropdown-menu">
                   {% for categoria in categorias %}
-                  <li><a class="dropdown-item" href="{{url('/Aula92-103.php/categoria/'~categoria.id)}}">{{categoria.titulo}}</a></li>
+                  <li><a class="dropdown-item" href="{{url('blog/categoria/'~categoria.id)}}">{{categoria.titulo}}</a></li>
                   {% endfor %}
                 </ul>
               </div>
-              <li><a href="{{url('/Aula92-103.php/sobre-nos')}}" class="nav-link px-2 text-white">Sobre</a></li>
+              <li><a href="{{url('blog/sobre-nos')}}" class="nav-link px-2 text-white">Sobre</a></li>
             </ul>
     
             <div class="position-relative" style="width: 300px;">
-              <form data-url-busca="{{url('/Aula92-103.php/buscar')}}" role="search">
+              <form data-url-busca="{{url('/blog/buscar')}}" role="search">
                 <input type="search" id="busca" name="busca" class="form-control form-control-dark text-bg-dark busca-input" placeholder="Buscar..." aria-label="Search">
               </form>
 

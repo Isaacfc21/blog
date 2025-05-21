@@ -13,7 +13,7 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
               <li class="breadcrumb-item">
-                  <a id="nav_a" href="{{url('Aula92-103.php/admin/dashboard')}}">
+                  <a id="nav_a" href="{{url('blog/admin/dashboard')}}">
                       Home
                   </a>
               </li>
@@ -32,7 +32,7 @@
                 <span class="badge text-bg-success">{{total.ativo}} Ativos</span>
                 <span class="badge text-bg-danger">{{total.inativo}} Inativos</span>
               </div>
-              <a href="{{url('/Aula92-103.php/admin/posts/cadastrar')}}" id="btn_cadastrar" class="btn btn-primary">Cadastrar</a>
+              <a href="{{url('/blog/admin/posts/cadastrar')}}" id="btn_cadastrar" class="btn btn-primary">Cadastrar</a>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -60,8 +60,8 @@
                                         {% endif %}
                                     </td>
                                     <td class="acao">
-                                      <a class="editar" href="{{url('Aula92-103.php/admin/posts/editar/'~post.id)}}"><img src="/templates/dashboard/assets/img/editar.svg" alt=""></a>
-                                      <a class="deletar" href="{{url('Aula92-103.php/admin/posts/deletar/'~post.id)}}"><img src="/templates/dashboard/assets/img/lixeira.svg" alt=""></a>
+                                      <a class="editar" href="{{url('blog/admin/posts/editar/'~post.id)}}"><img src="/templates/dashboard/assets/img/editar.svg" alt=""></a>
+                                      <a class="deletar" href="{{url('blog/admin/posts/deletar/'~post.id)}}"><img src="/templates/dashboard/assets/img/lixeira.svg" alt=""></a>
                                       <img src="" alt="">
                                     </td>
                                 </tr>
