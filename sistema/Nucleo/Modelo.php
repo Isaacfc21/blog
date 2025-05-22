@@ -205,7 +205,7 @@ abstract class Modelo
 
     public function total(string $where = ''): int
     {
-        $sql = 'SELECT COUNT(*) FROM posts';
+        $sql = "SELECT COUNT(*) FROM {$this->tabela}";
         if (!empty($where)) {
             $sql .= ' WHERE ' . $where;
         }
@@ -214,7 +214,6 @@ abstract class Modelo
         $stmt->execute();
         return (int) $stmt->fetchColumn();
     }
-
 
     public function salvar()
     {

@@ -2,7 +2,9 @@
 
 namespace sistema\Controlador\Admin;
 use sistema\Nucleo\Controlador;
+use sistema\Modelo\UsuarioModelo;
 use sistema\Nucleo\Helpers_c;
+use sistema\Controlador\UsuarioControlador;
 
 /**
  * Class AdminLogin
@@ -17,21 +19,31 @@ class AdminLogin extends Controlador
       parent::__construct('templates/dashboard/views'); 
     }
 
-    public function login():void
+    public function login(): void
     {
+        // Primeiro, verifica se já está logado
+        $usuario = UsuarioControlador::usuario();
+        if ($usuario && $usuario->level == 3) {
+            Helpers_c::redirecionar('blog/admin/dashboard');
+        }
+
+        // Se o formulário foi enviado
         $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
-        if(isset($dados)){
-            if(in_array('', $dados)){
+
+        if ($dados) {
+            if (in_array('', $dados)) {
                 $this->mensagem->erro('Preencha todos os campos!')->flash();
-            }elseif(strlen($dados['senha']) < 6){
+            } elseif (strlen($dados['senha']) < 6) {
                 $this->mensagem->erro('A senha deve ter no mínimo 6 caracteres!')->flash();
-            }else{
-              $this->mensagem->sucesso('Login Efetuado com sucesso!')->flash();
+            } elseif ((new UsuarioModelo())->login($dados, 3)) {
+                Helpers_c::redirecionar('blog/admin/dashboard');
             }
         }
 
         echo $this->template->renderizar('login.html', []);
     }
+
+
     
     // private function ChecarDados(array $dados):bool
     // {

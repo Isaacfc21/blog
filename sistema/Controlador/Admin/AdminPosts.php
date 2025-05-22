@@ -39,7 +39,7 @@ class AdminPosts extends AdminControlador
 
             if($post->salvar()){
                 $this->mensagem->sucesso('Post cadastrado com sucesso!')->flash();
-                Helpers_c::redirecionar('Aula92-103.php/admin/posts/listar');
+                Helpers_c::redirecionar('blog/admin/posts/listar');
             }
         }
 
@@ -63,7 +63,7 @@ class AdminPosts extends AdminControlador
 
             if($post->salvar()){
                 $this->mensagem->sucesso('Post atualizado com sucesso!')->flash();
-                Helpers_c::redirecionar('Aula92-103.php/admin/posts/listar');
+                Helpers_c::redirecionar('blog/admin/posts/listar');
             }
             $this->mensagem->alerta('Post editado com sucesso!')->flash();
             Helpers_c::redirecionar('Aula92-103.php/admin/posts/listar');
@@ -90,14 +90,14 @@ class AdminPosts extends AdminControlador
             $post = (new PostModelo())->buscaPorId($id);
             if(!$post){
                 $this->mensagem->alerta('Post não encontrado!')->flash();
-                Helpers_c::redirecionar('Aula92-103.php/admin/posts/listar');
+                Helpers_c::redirecionar('blog/admin/posts/listar');
             } else {
                 if($post->deletar()){
                     $this->mensagem->sucesso('Post deletado com sucesso!')->flash();
-                    Helpers_c::redirecionar('Aula92-103.php/admin/posts/listar');
+                    Helpers_c::redirecionar('blog/admin/posts/listar');
                 } else {
                     $this->mensagem->erro($post->erro())->flash();
-                    Helpers_c::redirecionar('Aula92-103.php/admin/posts/listar');
+                    Helpers_c::redirecionar('blog/admin/posts/listar');
                 }
             }
         }
@@ -105,7 +105,7 @@ class AdminPosts extends AdminControlador
         if($id){
             $post = (new PostModelo())->buscaPorId($id);
             if(!$post){
-                Helpers_c::redirecionar('Aula92-103.php/404');
+                Helpers_c::redirecionar('blog/404');
             }
         }
     }

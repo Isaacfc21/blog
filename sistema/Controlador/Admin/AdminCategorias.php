@@ -36,7 +36,7 @@ class AdminCategorias extends AdminControlador
 
             if($categoria->salvar()){
                 $this->mensagem->sucesso('Categoria cadastrada com sucesso!')->flash();
-                Helpers_c::redirecionar('Aula92-103.php/admin/categorias/listar');
+                Helpers_c::redirecionar('blog/admin/categorias/listar');
             }
         }
         
@@ -47,7 +47,7 @@ class AdminCategorias extends AdminControlador
         $categoria = (new CategoriaModelo())->buscaPorId($id);
 
         if (!$categoria) {
-            Helpers_c::redirecionar('Aula92-103.php/404');
+            Helpers_c::redirecionar('blog/404');
             exit;
         }
 
@@ -60,11 +60,11 @@ class AdminCategorias extends AdminControlador
 
             if ($categoria->salvar()) {
                 $this->mensagem->sucesso('Categoria atualizada com sucesso!')->flash();
-                Helpers_c::redirecionar('Aula92-103.php/admin/categorias/listar');
+                Helpers_c::redirecionar('blog/admin/categorias/listar');
                 exit;
             } else {
                 $this->mensagem->alerta('Falha ao atualizar a categoria!')->flash();
-                Helpers_c::redirecionar('Aula92-103.php/admin/categorias/listar');
+                Helpers_c::redirecionar('blog/admin/categorias/listar');
                 exit;
             }
         }
@@ -88,14 +88,14 @@ class AdminCategorias extends AdminControlador
             $categoria = (new CategoriaModelo())->buscaPorId($id);
             if(!$categoria){
                 $this->mensagem->alerta('Categoria não encontrada!')->flash();
-                Helpers_c::redirecionar('Aula92-103.php/admin/categorias/listar');
+                Helpers_c::redirecionar('blog/admin/categorias/listar');
             } else {
                 if($categoria->apagar("id = {$id}")){
                     $this->mensagem->sucesso('Categoria deletada com sucesso!')->flash();
-                    Helpers_c::redirecionar('Aula92-103.php/admin/categorias/listar');
+                    Helpers_c::redirecionar('blog/admin/categorias/listar');
                 } else {
                     $this->mensagem->erro($categoria->erro())->flash();
-                    Helpers_c::redirecionar('Aula92-103.php/admin/categorias/listar');
+                    Helpers_c::redirecionar('blog/admin/categorias/listar');
                 }
             }
         }
@@ -103,7 +103,7 @@ class AdminCategorias extends AdminControlador
         if($id){
             $categoria = (new CategoriaModelo())->buscaPorId($id);
             if(!$categoria){
-                Helpers_c::redirecionar('Aula92-103.php/404');
+                Helpers_c::redirecionar('blog/404');
             }
         }
     }

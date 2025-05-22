@@ -3,6 +3,8 @@
 namespace sistema\Controlador\Admin;
 use sistema\Nucleo\Controlador;
 use sistema\Nucleo\Helpers_c;
+use sistema\Controlador\UsuarioControlador;
+use sistema\Nucleo\Sessao;
 
 /**
  * Class AdminControlador
@@ -12,16 +14,24 @@ use sistema\Nucleo\Helpers_c;
 
 class AdminControlador extends Controlador
 {
+    protected $usuario;
+
     public function __construct()
     {
       parent::__construct('templates/dashboard/views'); 
       
-      $usuario = false;
+      $this->usuario = UsuarioControlador::usuario();
 
-      if(!$usuario){
-        $this->mensagem->alerta('Você não tem permissão para acessar esta área!')->flash();
-        Helpers_c::redirecionar('Aula92-103.php/admin/login');
+      if(!$this->usuario || $this->usuario->level != 3){
+        $this->mensagem->erro('Faça login para acessar o painel de controle!')->flash();
+        $sessao = (new Sessao());
+        $sessao->limpar('usuarioId');
+        Helpers_c::redirecionar('blog/admin/login');
       }
+
+      // if($this->usuario || $this->usuario->level == 3){
+        
+      // }
     }
 }
 
