@@ -18,6 +18,7 @@ try{
 
         //DASHBOARD
         SimpleRouter::get(URL_ADMIN.'dashboard', 'AdminDashboard@dashboard');
+        SimpleRouter::get(URL_ADMIN.'sair', 'AdminDashboard@sair');
 
         //ADMIN POSTS
         SimpleRouter::get(URL_ADMIN.'posts/listar', 'AdminPosts@listar');
@@ -34,7 +35,7 @@ try{
 
     SimpleRouter::start();
 }catch (Pecee\SimpleRouter\Exceptions\NotFoundHttpException $ex){
-    if(Helpers_c::localhost()){
+    if(!Helpers_c::localhost()){
         echo $ex;
     }else{
         Helpers_c::redirecionar('/blog/404');

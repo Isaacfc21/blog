@@ -70,7 +70,7 @@ class Mensagem
 
     public function informa(string $mensagem): Mensagem
     {
-        $this->css = 'alert alert-primary';
+        $this->css = 'alert alert-primary alert-dismissible fade show';
         $this->texto = $this->filtrar($mensagem);
         return $this;
     }
