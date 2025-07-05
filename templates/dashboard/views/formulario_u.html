@@ -38,49 +38,68 @@
                 </li>
             </ol>
         </nav>
+
+        {{ flash() }}
+
         <div class="card border-0 shadow-sm">
             <div class="card-body">
-                <form action="{% if usuario.id %} {{ url('blog/admin/usuarios/editar/' ~ usuario.id) }} {% else %} {{ url('blog/admin/usuarios/cadastrar') }} {% endif %}" method="post">
-                    <div class="row g-3">
-                        <div class="col-12 col-md-6">
-                            <input type="text" name="nome" class="form-control" placeholder="Nome" value="{{ usuario.nome }}">
+                <form action="{% if usuario.id %} {{ url('blog/admin/usuarios/editar/'~usuario.id) }} {% else %} {{ url('blog/admin/usuarios/cadastrar') }} {% endif %}" method="post">
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" name="nome" class="form-control" placeholder="Nome" value="{{ usuario.nome }}">
+                                <label for="nome">Nome</label>
+                            </div>
                         </div>
 
-                        <div class="col-12 col-md-6">
-                            <input type="email" name="email" class="form-control" placeholder="E‑mail" value="{{ usuario.email|default('') }}">
+                        <div class="col-sm-6">
+                            <div class="form-floating mb-3">
+                                <input type="email" name="email" class="form-control" placeholder="E‑mail" value="{{ usuario.email}}">
+                                <label for="email">E-mail</label>
+                            </div>
                         </div>
 
-                        <div class="col-12 col-md-6">
-                            <input type="password" name="senha" class="form-control" placeholder="Senha">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="password" name="senha" class="form-control" placeholder="Senha">
+                                <label for="senha">Senha</label>
+                            </div>
                         </div>
 
-                        <div class="col-6 col-md-3">
-                            <select name="level" class="form-select">
-                                <option value="Usuario"
-                                        {% if usuario.level == 'Usuario' %}selected{% endif %}>
-                                    Usuário
-                                </option>
-                                <option value="Admin"
-                                        {% if usuario.level == 'Admin' %}selected{% endif %}>
-                                    Admin
-                                </option>
-                            </select>
+                        <div class="col-sm-3">
+                            <div class="form-floating">
+                                <select name="level" class="form-select">
+                                    <option value="Usuario"
+                                            {% if usuario.level == '1' %}selected{% endif %}>
+                                        Usuário
+                                    </option>
+                                    <option value="Admin"
+                                            {% if usuario.level == '3' %}selected{% endif %}>
+                                        Admin
+                                    </option>
+                                </select>
+                                <label for="usuario">Usuários</label>
+                            </div>
                         </div>
 
-                        <div class="col-6 col-md-3">
-                            <select name="status" class="form-select">
-                                <option value="1"
-                                        {% if usuario.status == '1' %}selected{% endif %}>
-                                    Ativo
-                                </option>
-                                <option value="0"
-                                        {% if usuario.status == '0' %}selected{% endif %}>
-                                    Inativo
-                                </option>
-                            </select>
+                        <div class="col-sm-3">
+                            <div class="form-floating">
+                                <select name="status" class="form-select">
+                                    <option value="1"
+                                            {% if usuario.status == '1' %}selected{% endif %}>
+                                        Ativo
+                                    </option>
+                                    <option value="0"
+                                            {% if usuario.status == '0' %}selected{% endif %}>
+                                        Inativo
+                                    </option>
+                                </select>
+                                <label for="status">Status</label>
+                            </div>
                         </div>
 
-                        <div class="col-12">
+                        <div class="d-grip gap-2">
                             <button type="submit"
                                     class="btn btn-dark w-100">
                                 {% if usuario.id %}Atualizar{% else %}Cadastrar{% endif %}

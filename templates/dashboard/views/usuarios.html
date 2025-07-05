@@ -60,32 +60,34 @@
                             <th scope="col">ID</th>
                             <th scope="col">Nome</th>
                             <th scope="col">Email</th>
-                            <th scope="col">Level</th>
-                            <th scope="col">Status</th>
-                            <th class="acao" scope="col">Ação</th>
+                            <th class="text-center" scope="col">Level</th>
+                            <th class="text-center" scope="col">Status</th>
+                            <th class="text-center" class="acao" scope="col">Ação</th>
                           </tr>
                         </thead>
                         <tbody>
                             {% for usuario in usuarios %}
                                 <tr>
                                     <th>{{usuario.id}}</th>
-                                    <td>
-                                      <!-- <a href="{{url('admin/usuarios/editar/~usuario.id')}}"> -->
-                                        {{usuario.nome}}
-                                      <!-- </a> -->
-                                    </td>
+                                    <td>{{usuario.nome}}</td>
                                     <td>{{usuario.email}}</td>
-                                    <td>{{usuario.level}}</td>
-                                    <td>
+                                    <td class="text-center">
+                                      {% if usuario.level == 3 %}
+                                        <div class="text-danger fw-bold">Admin</div>
+                                      {% else %}
+                                        <div class="text-secondary">Usuário</div>
+                                      {% endif %}
+                                    </td>
+                                    <td class="text-center">
                                         {% if usuario.status == 1 %}
-                                            <span class="badge bg-success">Ativo</span>
+                                            <i class="fa-solid fa-circle text-success"></i>
                                         {% else %}
-                                            <span class="badge bg-danger">Inativo</span>
+                                            <i class="fa-solid fa-circle text-danger"></i>
                                         {% endif %}
                                     </td>
                                     <td class="acao">
-                                      <a class="editar" href="{{url('blog/admin/posts/editar/'~post.id)}}"><img src="/templates/dashboard/assets/img/editar.svg" alt=""></a>
-                                      <a class="deletar" href="{{url('blog/admin/posts/deletar/'~post.id)}}"><img src="/templates/dashboard/assets/img/lixeira.svg" alt=""></a>
+                                      <a class="editar" href="{{url('blog/admin/usuarios/editar/'~usuario.id)}}"><img src="/templates/dashboard/assets/img/editar.svg" alt=""></a>
+                                      <a class="deletar" href="{{url('blog/admin/usuarios/deletar/'~usuario.id)}}"><img src="/templates/dashboard/assets/img/lixeira.svg" alt=""></a>
                                       <img src="" alt="">
                                     </td>
                                 </tr>
