@@ -20,6 +20,9 @@ try{
         SimpleRouter::get(URL_ADMIN.'dashboard', 'AdminDashboard@dashboard');
         SimpleRouter::get(URL_ADMIN.'sair', 'AdminDashboard@sair');
 
+        //ADMIN Usuários
+        SimpleRouter::get(URL_ADMIN.'usuarios/listar', 'AdminUsuarios@listar');
+
         //ADMIN POSTS
         SimpleRouter::get(URL_ADMIN.'posts/listar', 'AdminPosts@listar');
         SimpleRouter::get(URL_ADMIN.'posts/deletar{id}', 'AdminPosts@deletar');
