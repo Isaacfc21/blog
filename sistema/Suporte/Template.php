@@ -2,7 +2,7 @@
 
 namespace sistema\Suporte;
 use Twig\Lexer;
-use \sistema\Nucleo\Helpers_c;
+use sistema\Nucleo\Helpers_c;
 use sistema\Controlador\UsuarioControlador;
 
 /**
