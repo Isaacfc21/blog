@@ -3,6 +3,7 @@
 namespace sistema\Suporte;
 use Twig\Lexer;
 use \sistema\Nucleo\Helpers_c;
+use sistema\Controlador\UsuarioControlador;
 
 /**
  * Class Controlador
@@ -51,6 +52,11 @@ class Template
             $this->twig->addFunction(
                 new \Twig\TwigFunction('flash', function(){
                     return Helpers_c::flash();
+                })   
+            ),
+            $this->twig->addFunction(
+                new \Twig\TwigFunction('usuario', function(){
+                    return UsuarioControlador::usuario();
                 })   
             )
         );

@@ -11,17 +11,15 @@
         <span class="menu-toggle" id="menu-toggle">&#9776;</span>
         <div class="dropdown user-info">
             <button class="btn bg-white dropdown-toggle d-flex align-items-center" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
-                <span class="icon me-2">👤</span>  Isaac Dias
+                <span class="icon me-2">👤</span>  {{ usuarioLogado.nome }}
             </button>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
                 <li>
                     <a class="dropdown-item" href="#" tooltip="tooltip" title="Perfil">Perfil</a>
                 </li>
-
                 <li><hr class="dropdown-divider"></li>
-
                 <li>
-                    <a class="dropdown-item text-danger" tooltip="tooltip" href="{{url('blog/admin/sair')}}" title="Sair do Sistema">Sair</a>
+                    <a class="dropdown-item text-danger" tooltip="tooltip" href="{{ url('blog/admin/sair') }}" title="Sair do Sistema">Sair</a>
                 </li>
             </ul>
         </div>
@@ -30,14 +28,42 @@
       {{ flash() }}
 
       <section class="content">
-        <div class="card border-0 shadow-sm">
-            <div class="card-header bg-white border-0">
-                <h5 class="card-title">Dashboard</h5>
-            </div>
+        <h5 class="mb-3 fw-bold">Dashboard</h5>
 
-            <div class="card-body">
-                Conteúdo em desenvolvimento
+        <div class="row d-flex align-items-stretch">
+          <div class="col-md-6 h-100">
+            <div class="card border-0 shadow-sm mb-3">
+              <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
+                <h6 class="mb-0">Posts</h6>
+                <a href="{{ url('blog/admin/posts/cadastrar') }}" tooltip="tooltip" title="Cadastrar Post">
+                  <i class="fa-solid fa-file-pen text-secondary"></i>
+                </a>
+              </div>
+              <div class="card-body">
+                <h1 class="mt-1 mb-3">{{ posts.total }}</h1>
+                <span class="badge bg-success bg-opacity-10 text-success me-2">{{ posts.ativo }} Ativo</span>
+                <span class="badge bg-danger bg-opacity-10 text-danger">{{ posts.inativo }} Inativo</span>
+              </div>
             </div>
+          </div>
+
+          <div class="col-md-6 h-100">
+            <div class="card border-0 shadow-sm mb-3">
+              <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
+                <h6 class="mb-0">Usuários</h6>
+                <i class="fa-solid fa-users text-secondary"></i>
+              </div>
+              <div class="card-body">
+                <h1 class="mt-1 mb-3">{{ usuarios.total }}</h1>
+                <span class="badge bg-success bg-opacity-10 text-success me-2">{{ usuarios.ativo }} Ativo</span>
+                <span class="badge bg-danger bg-opacity-10 text-danger">{{ usuarios.inativo }} Inativo</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-4">
+          <input type="text" readonly class="form-control text-center" value="Em desenvolvimento" />
         </div>
       </section>
     </div>
@@ -45,3 +71,6 @@
 </div>
 
 {% endblock %}
+
+
+
