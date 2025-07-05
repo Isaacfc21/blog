@@ -224,6 +224,11 @@ public static function localhost(): bool
     return false;
 }
 
+public static function validarEmail(string $email): bool
+{
+    return filter_var($email, FILTER_VALIDATE_EMAIL);
+}
+
 }
 
 ?>

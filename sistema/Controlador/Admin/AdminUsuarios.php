@@ -6,7 +6,7 @@ use sistema\Modelo\UsuarioModelo;
 
 // use sistema\Modelo\PostModelo;
 // use sistema\Modelo\CategoriaModelo;
-// use sistema\Nucleo\Helpers_c;
+use sistema\Nucleo\Helpers_c;
 
 /**
  * Class AdminUsuarios
@@ -21,98 +21,133 @@ class AdminUsuarios extends AdminControlador
         $usuario = new UsuarioModelo();
 
         echo $this->template->renderizar('usuarios.html', [
-            'usuarios' => $usuario->busca()->ordem('status ASC, id ASC')->resultado(true),
+            'usuarios' => $usuario->busca()->ordem('status DESC, id ASC')->resultado(true),
             'total' => [
-                'total' => $usuario->total(),
-                'ativo' => $usuario->total('status = 1'), 
-                'inativo' => $usuario->total('status = 0')
+                'usuarios' => $usuario->busca('level != 3')->total(),
+                'usuariosAtivo' => $usuario->total('status = 1 AND level != 3'),
+                'usuariosInativo' => $usuario->total('status = 0 AND level != 3'),
+                'admin' => $usuario->busca('level = 3')->total(),
+                'adminAtivo' => $usuario->total('status = 1 AND level = 3'),
+                'adminInativo' => $usuario->total('status = 0 AND level = 3'),
             ]
         ]);
     }
-    // public function cadastrar():void
-    // {
-    //     $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+    public function cadastrar():void
+    {
+        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
         
-    //     if(isset($dados)){
-    //         $post  = new PostModelo();
+        if(isset($dados)){
+            if($this->validarDados($dados)){
+                if(empty($dados['senha'])){
+                    $this->mensagem->alerta('O campo senha é obrigatório!')->flash();
+                }else{
+                    $usuario = new UsuarioModelo();
+                    $usuario->nome = $dados['nome'];
+                    $usuario->email = $dados['email'];
+                    $usuario->senha = $dados['senha'];
+                    $usuario->level = $dados['level'];
+                    $usuario->status = $dados['status'];
+                    $usuario->cadastrado_em = date('Y-m-d H:i:s');
+                }
+            }
 
-    //         $post->titulo = $dados['titulo'];
-    //         $post->categoria_id = $dados['categoria_id'];
-    //         $post->texto = $dados['texto'];
-    //         $post->status = $dados['status'];
+            if($usuario->salvar()){
+                $this->mensagem->sucesso('Usuario cadastrado com sucesso!')->flash();
+                Helpers_c::redirecionar('blog/admin/usuarios/listar');
+            }else{
+                $this->mensagem->erro($usuario->erro())->flash();
+                Helpers_c::redirecionar('blog/admin/usuarios/cadastrar');
+            }
+        }
 
-    //         if($post->salvar()){
-    //             $this->mensagem->sucesso('Post cadastrado com sucesso!')->flash();
-    //             Helpers_c::redirecionar('blog/admin/posts/listar');
-    //         }
-    //     }
+        echo $this->template->renderizar('formulario_u.html', [
+            'usuario' => $dados
+        ]);
+    }
+    public function editar( int $id):void
+    {
+        $usuario = (new UsuarioModelo())->buscaPorId($id);
 
-    //     echo $this->template->renderizar('posts/formulario_p.html', [
-    //         'categorias' => (new CategoriaModelo())->busca()->resultado(true),
-    //     ]);
-    // }
-    // public function editar( int $id):void
-    // {
-    //     $post = (new PostModelo())->buscaPorId($id);
+        $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
-    //     $dados = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+        if(isset($dados)){
+            if($this->validarDados($dados)){
+                $usuario = (new UsuarioModelo())->buscaPorId($id);
+                $usuario->nome = $dados['nome'];
+                $usuario->email = $dados['email'];
+                $usuario->senha = (!empty($dados['senha']) ? $dados['senha'] : $usuario->senha);
+                $usuario->level = $dados['level'];
+                $usuario->status = $dados['status'];
+                $usuario->atualizado_em = date('Y-m-d H:i:s');
+                
+            }
 
-    //     if(isset($dados)){
-    //         $post  = (new PostModelo())->buscaPorId($id);
+            if($usuario->salvar()){
+                $this->mensagem->sucesso('Usuario atualizado com sucesso!')->flash();
+                Helpers_c::redirecionar('blog/admin/usuarios/listar');
+            }else{
+                $this->mensagem->erro($usuario->erro())->flash();
+                Helpers_c::redirecionar('blog/admin/usuarios/editar');
+            }
+        }
 
-    //         $post->titulo = $dados['titulo'];
-    //         $post->categoria_id = $dados['categoria_id'];
-    //         $post->texto = $dados['texto'];
-    //         $post->status = $dados['status'];
+        echo $this->template->renderizar('formulario_u.html', [
+            'usuario' => $usuario,
+        ]);
+    }
+    public function deletar(int $id):void
+    {
 
-    //         if($post->salvar()){
-    //             $this->mensagem->sucesso('Post atualizado com sucesso!')->flash();
-    //             Helpers_c::redirecionar('blog/admin/posts/listar');
-    //         }
-    //         $this->mensagem->alerta('Post editado com sucesso!')->flash();
-    //         Helpers_c::redirecionar('Aula92-103.php/admin/posts/listar');
-    //     }
+        // $id =  filter_var($id, FILTER_VALIDATE_INT); 
 
-    //     if(!$post){
-    //         Helpers_c::redirecionar('Aula92-103.php/404');
-    //     }
-    //     echo $this->template->renderizar('posts/formulario_p.html', [
-    //         'post' => $post,
-    //         'categorias' => (new CategoriaModelo())->busca()->resultado(true),
-    //     ]);
-    // }
-    // public function deletar(int $id):void
-    // {
+        // if($id){
 
-    //     // $id =  filter_var($id, FILTER_VALIDATE_INT); 
+        // } OU
 
-    //     // if($id){
+        if(is_int($id)){
+            $usuario = (new UsuarioModelo())->buscaPorId($id);
+            if(!$usuario){
+                $this->mensagem->alerta('Usuario não encontrado!')->flash();
+                Helpers_c::redirecionar('blog/admin/usuarios/listar');
+            } else {
+                if($usuario->deletar()){
+                    $this->mensagem->sucesso('Usuario deletado com sucesso!')->flash();
+                    Helpers_c::redirecionar('blog/admin/usuarios/listar');
+                } else {
+                    $this->mensagem->erro($usuario->erro())->flash();
+                    Helpers_c::redirecionar('blog/admin/usuarios/listar');
+                }
+            }
+        }
 
-    //     // } OU
+        if($id){
+            $usuario = (new UsuarioModelo())->buscaPorId($id);
+            if(!$usuario){
+                Helpers_c::redirecionar('blog/404');
+            }
+        }
+    }
 
-    //     if(is_int($id)){
-    //         $post = (new PostModelo())->buscaPorId($id);
-    //         if(!$post){
-    //             $this->mensagem->alerta('Post não encontrado!')->flash();
-    //             Helpers_c::redirecionar('blog/admin/posts/listar');
-    //         } else {
-    //             if($post->deletar()){
-    //                 $this->mensagem->sucesso('Post deletado com sucesso!')->flash();
-    //                 Helpers_c::redirecionar('blog/admin/posts/listar');
-    //             } else {
-    //                 $this->mensagem->erro($post->erro())->flash();
-    //                 Helpers_c::redirecionar('blog/admin/posts/listar');
-    //             }
-    //         }
-    //     }
+    public function validarDados(array $dados): bool
+    {
 
-    //     if($id){
-    //         $post = (new PostModelo())->buscaPorId($id);
-    //         if(!$post){
-    //             Helpers_c::redirecionar('blog/404');
-    //         }
-    //     }
-    // }
+        if(empty($dados['nome'])){
+            $this->mensagem->alerta('O campo nome é obrigatório!')->flash();
+            return false;
+        }
+
+        if(empty($dados['email'])){
+            $this->mensagem->alerta('O campo e-mail é obrigatório!')->flash();
+            return false;
+        }
+
+        if(!Helpers_c::validarEmail($dados['email'])){
+            $this->mensagem->alerta('O campo email é obrigatório!')->flash();
+            return false;
+        }
+
+        return true;
+    }
 }
 
 ?>

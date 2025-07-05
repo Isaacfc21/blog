@@ -22,6 +22,9 @@ try{
 
         //ADMIN Usuários
         SimpleRouter::get(URL_ADMIN.'usuarios/listar', 'AdminUsuarios@listar');
+        SimpleRouter::get(URL_ADMIN.'usuarios/deletar{id}', 'AdminUsuarios@deletar');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN.'usuarios/cadastrar', 'AdminUsuarios@cadastrar');
+        SimpleRouter::match(['get', 'post'], URL_ADMIN.'usuarios/editar/{id}', 'AdminUsuarios@editar');
 
         //ADMIN POSTS
         SimpleRouter::get(URL_ADMIN.'posts/listar', 'AdminPosts@listar');

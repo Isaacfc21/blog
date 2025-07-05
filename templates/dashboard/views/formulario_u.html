@@ -1,0 +1,95 @@
+{% extends 'dashboard.html' %}
+
+{% block conteudo %}
+    <div class="main" id="main">
+      <header>
+        <span class="menu-toggle" id="menu-toggle">&#9776;</span>
+        <div class="dropdown user-info">
+            <button class="btn bg-white dropdown-toggle d-flex align-items-center" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="icon me-2">👤</span>  {{ usuario().nome }}
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
+                <li>
+                    <a class="dropdown-item" href="#" tooltip="tooltip" title="Perfil">Perfil</a>
+                </li>
+                <li><hr class="dropdown-divider"></li>
+                <li>
+                    <a class="dropdown-item text-danger" tooltip="tooltip" href="{{ url('blog/admin/sair') }}" title="Sair do Sistema">Sair</a>
+                </li>
+            </ul>
+        </div>
+      </header>
+
+      <section class="content">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a id="nav_a" href="{{url('blog/admin/dashboard')}}">
+                        Home
+                    </a>
+                </li>
+                <li id="nav_li" class="breadcrumb-item active" aria-current="page">
+                    <a id="nav_a" href="{{url('blog/admin/usuarios/listar')}}">
+                        Usuarios
+                    </a>
+                </li>
+                <li id="nav_li" class="breadcrumb-item active" aria-current="page">
+                    {% if usuario.id %}Editar{% else %}Cadastrar{% endif %}
+                </li>
+            </ol>
+        </nav>
+        <div class="card border-0 shadow-sm">
+            <div class="card-body">
+                <form action="{% if usuario.id %} {{ url('blog/admin/usuarios/editar/' ~ usuario.id) }} {% else %} {{ url('blog/admin/usuarios/cadastrar') }} {% endif %}" method="post">
+                    <div class="row g-3">
+                        <div class="col-12 col-md-6">
+                            <input type="text" name="nome" class="form-control" placeholder="Nome" value="{{ usuario.nome }}">
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <input type="email" name="email" class="form-control" placeholder="E‑mail" value="{{ usuario.email|default('') }}">
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <input type="password" name="senha" class="form-control" placeholder="Senha">
+                        </div>
+
+                        <div class="col-6 col-md-3">
+                            <select name="level" class="form-select">
+                                <option value="Usuario"
+                                        {% if usuario.level == 'Usuario' %}selected{% endif %}>
+                                    Usuário
+                                </option>
+                                <option value="Admin"
+                                        {% if usuario.level == 'Admin' %}selected{% endif %}>
+                                    Admin
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-6 col-md-3">
+                            <select name="status" class="form-select">
+                                <option value="1"
+                                        {% if usuario.status == '1' %}selected{% endif %}>
+                                    Ativo
+                                </option>
+                                <option value="0"
+                                        {% if usuario.status == '0' %}selected{% endif %}>
+                                    Inativo
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="col-12">
+                            <button type="submit"
+                                    class="btn btn-dark w-100">
+                                {% if usuario.id %}Atualizar{% else %}Cadastrar{% endif %}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+      </section>
+    </div>
+{% endblock %}
